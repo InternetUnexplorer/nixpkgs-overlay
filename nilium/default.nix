@@ -14,4 +14,10 @@ stdenv.mkDerivation rec {
   installPhase = ''
     cp -a Nilium $out/
   '';
+
+  meta = {
+    description = "Nilium is a dark theme designed from scratch for Plasma 5";
+    homepage = "https://github.com/mcder3/Nilium-Plasma-Theme/";
+    license = "CC-BY-SA-4.0";
+  };
 }

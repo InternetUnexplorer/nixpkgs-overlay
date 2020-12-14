@@ -1,16 +1,18 @@
-{ stdenv, fetchurl, meson, ninja, fetchgit, python3, gobject-introspection
-, pkgconfig, gtk3, pango, glib, desktop-file-utils, wrapGAppsHook, libdazzle
-, libnotify, libappindicator }:
+{ stdenv, fetchurl, fetchFromGitLab, meson, ninja, fetchgit, python3
+, gobject-introspection, pkgconfig, gtk3, pango, glib, desktop-file-utils
+, wrapGAppsHook, libdazzle, libnotify, libappindicator }:
+
+# Requires `hardware.opengl.setLdLibraryPath = true;` in `configuration.nix`.
 
 python3.pkgs.buildPythonApplication rec {
   pname = "gwe";
   version = "0.15.2";
-  name = "${pname}-${version}";
   format = "other";
 
-  src = fetchTarball {
-    url =
-      "https://gitlab.com/leinardi/gwe/-/archive/${version}/gwe-${version}.tar.gz";
+  src = fetchFromGitLab {
+    owner = "leinardi";
+    repo = "gwe";
+    rev = version;
     sha256 = "02sh6gzh9q4y8d8mfyg00g00xc3icg7c8822r1svj1ic1xlf5bj0";
   };
 
