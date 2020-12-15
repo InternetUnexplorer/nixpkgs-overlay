@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "tsujan";
     repo = "BreezeEnhanced";
-    rev = "v${version}";
+    rev = "V${version}";
     sha256 = "1yrdnb9yq5n41j2g144qgv3bbbp3vfpq9c8bzdyh17v56ipbz9zq";
   };
 
