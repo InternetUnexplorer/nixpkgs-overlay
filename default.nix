@@ -13,6 +13,7 @@ in {
   ##
   blender = callPackageSuper ./blender { };
   capitaine-cursors = callPackageSuper ./capitaine-cursors { };
+  inconsolata = callPackageSuper ./inconsolata { };
   openrgb = callPackageSuper ./openrgb { };
   plasma5 = super.plasma5 // {
     kwin = callPackageSuper ./kwin { };
