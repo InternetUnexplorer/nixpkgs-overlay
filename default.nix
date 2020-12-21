@@ -5,6 +5,7 @@ in {
   ## New Packages
   ##
   breeze-enhanced = super.callPackage ./breeze-enhanced { };
+  breeze-mod-sddm-theme = super.callPackage ./breeze-mod-sddm-theme { };
   gwe = super.callPackage ./gwe { };
   nilium = super.callPackage ./nilium { };
 
@@ -15,8 +16,5 @@ in {
   capitaine-cursors = callPackageSuper ./capitaine-cursors { };
   inconsolata = callPackageSuper ./inconsolata { };
   openrgb = callPackageSuper ./openrgb { };
-  plasma5 = super.plasma5 // {
-    kwin = callPackageSuper ./kwin { };
-    plasma-workspace = callPackageSuper ./plasma-workspace { };
-  };
+  plasma5 = super.plasma5 // { kwin = callPackageSuper ./kwin { }; };
 }
