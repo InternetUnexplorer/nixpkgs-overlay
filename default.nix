@@ -7,6 +7,7 @@ in {
   breeze-enhanced = super.callPackage ./breeze-enhanced { };
   breeze-mod-sddm-theme = super.callPackage ./breeze-mod-sddm-theme { };
   gwe = super.callPackage ./gwe { };
+  luaformatter = super.callPackage ./luaformatter { };
   nilium = super.callPackage ./nilium { };
 
   ##
