@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
     owner = "Koihik";
     repo = "LuaFormatter";
     rev = version;
-    sha256 = "1igdcjbzm7z78f66856njxz7hpj3rjynb3sz899bv0p5sqv75j0c";
+    sha256 = "163190g37r6npg5k5mhdwckdhv9nwy2gnfp5jjk8p0s6cyvydqjw";
     fetchSubmodules = true;
   };
 
