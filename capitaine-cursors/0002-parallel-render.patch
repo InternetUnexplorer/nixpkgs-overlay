@@ -1,0 +1,21 @@
+diff --git a/build.sh b/build.sh
+index 731d2a6..f7785f3 100755
+--- a/build.sh
++++ b/build.sh
+@@ -121,7 +121,7 @@ function render {
+   esac
+ 
+   for svg_file in "$SRC/svg/$variant"/*.svg; do
+-   inkscape "${INKSCAPE_OPTS[@]}" "$OUTPUT_DIR/$(basename "${svg_file%.svg}").png" "$svg_file"
++   inkscape "${INKSCAPE_OPTS[@]}" "$OUTPUT_DIR/$(basename "${svg_file%.svg}").png" "$svg_file" &
+   done
+ }
+ 
+@@ -263,6 +263,7 @@ generate_in
+ for size in "${SIZES[@]}"; do
+   render "$size" "$VARIANT"
+ done
++wait
+ assemble "$VARIANT"
+ 
+ exit 0

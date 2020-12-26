@@ -1,5 +1,6 @@
 { capitaine-cursors }:
 
 capitaine-cursors.overrideAttrs (old: {
-  patches = (old.patches or [ ]) ++ [ ./capitaine-cursors-1.75x.patch ];
+  patches = (old.patches or [ ])
+    ++ [ ./0001-add-1-75x-size.patch ./0002-parallel-render.patch ];
 })
