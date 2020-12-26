@@ -1,5 +1,3 @@
-{ multimc, glfw3 }:
+{ multimc }:
 
-multimc.overrideAttrs (old: {
-  MULTIMC_LINUX_DATADIR = true;
-})
+multimc.overrideAttrs (old: { MULTIMC_LINUX_DATADIR = true; })
