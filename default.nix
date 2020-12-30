@@ -9,6 +9,7 @@ in {
   gwe = super.callPackage ./gwe { };
   luaformatter = super.callPackage ./luaformatter { };
   nilium = super.callPackage ./nilium { };
+  oh-my-fish = super.callPackage ./oh-my-fish { };
 
   ##
   ## Package Overrides
