@@ -14,7 +14,6 @@ in {
   ##
   ## Package Overrides
   ##
-  blender = callPackageSuper ./blender { };
   capitaine-cursors = callPackageSuper ./capitaine-cursors { };
   inconsolata = callPackageSuper ./inconsolata { };
   multimc = callPackageSuper ./multimc { };
