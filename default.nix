@@ -17,5 +17,5 @@ in {
   capitaine-cursors = callPackageSuper ./capitaine-cursors { };
   inconsolata = callPackageSuper ./inconsolata { };
   multimc = callPackageSuper ./multimc { };
-  plasma5 = super.plasma5 // { kwin = callPackageSuper ./kwin { }; };
+  picom = callPackageSuper ./picom { };
 }
