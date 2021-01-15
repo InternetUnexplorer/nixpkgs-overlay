@@ -9,6 +9,8 @@ let
 in runCommand "breeze-mod-sddm-theme" { } ''
   mkdir -p $out/share/sddm/themes/breeze-mod
   ln -s ${plasma-workspace}/share/sddm/themes/breeze/* $out/share/sddm/themes/breeze-mod
-  echo "[General]"                      >> $out/share/sddm/themes/breeze-mod/theme.conf.user
-  echo "background=${background-image}" >> $out/share/sddm/themes/breeze-mod/theme.conf.user
+  cat << EOF > $out/share/sddm/themes/breeze-mod/theme.conf.user
+  [General]
+  background=${background-image}
+  EOF
 ''
