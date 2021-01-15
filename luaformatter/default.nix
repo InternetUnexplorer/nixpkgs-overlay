@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
-  buildInputs = [ cmake gcc ];
+  nativeBuildInputs = [ cmake gcc ];
 
   meta = {
     description = "Code formatter for Lua";
