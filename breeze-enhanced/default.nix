@@ -1,5 +1,4 @@
-{ stdenv, fetchFromGitHub, cmake, extra-cmake-modules, plasma5, kdeFrameworks
-, qt5 }:
+{ stdenv, fetchFromGitHub, cmake, extra-cmake-modules, plasma5Packages, qt5 }:
 
 stdenv.mkDerivation rec {
   pname = "breeze-enhanced";
@@ -13,8 +12,11 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ cmake extra-cmake-modules ];
-  buildInputs =
-    [ plasma5.kdecoration kdeFrameworks.frameworkintegration qt5.qtx11extras ];
+  buildInputs = [
+    plasma5Packages.kdecoration
+    plasma5Packages.frameworkintegration
+    qt5.qtx11extras
+  ];
 
   meta = {
     description = "A fork of KDE Breeze decoration with additional options";
