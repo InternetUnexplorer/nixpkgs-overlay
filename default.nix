@@ -10,6 +10,7 @@ in {
   luaformatter = super.callPackage ./luaformatter { };
   nilium = super.callPackage ./nilium { };
   oh-my-fish = super.callPackage ./oh-my-fish { };
+  reStream = super.callPackage ./reStream { };
 
   ##
   ## Package Overrides
