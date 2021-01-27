@@ -1,4 +1,5 @@
-{ stdenv, lib, fetchFromGitHub, makeWrapper, lz4, ffmpeg-full, openssh }:
+{ stdenv, lib, fetchFromGitHub, makeWrapper, coreutils, lz4, ffmpeg-full
+, openssh }:
 
 stdenv.mkDerivation rec {
   pname = "reStream";
@@ -17,7 +18,7 @@ stdenv.mkDerivation rec {
     mkdir -p $out/bin
     cp -a reStream.sh $out/bin/reStream
     wrapProgram $out/bin/reStream \
-      --set PATH ${lib.makeBinPath [ lz4 ffmpeg-full openssh ]}
+      --set PATH ${lib.makeBinPath [ coreutils lz4 ffmpeg-full openssh ]}
   '';
 
   meta = {
