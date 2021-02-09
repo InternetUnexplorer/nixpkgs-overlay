@@ -1,5 +1,5 @@
-{ stdenv, lib, fetchFromGitHub, makeWrapper, coreutils, lz4, ffmpeg-full
-, openssh }:
+{ stdenv, lib, fetchFromGitHub, fetchpatch, makeWrapper, coreutils, lz4
+, ffmpeg-full, openssh }:
 
 stdenv.mkDerivation rec {
   pname = "reStream";
@@ -11,6 +11,13 @@ stdenv.mkDerivation rec {
     rev = version;
     sha256 = "18z17chl7r5dg12xmr3f9gbgv97nslm8nijigd03iysaj6dhymp3";
   };
+
+  patches = [
+    (fetchpatch {
+      url = "https://github.com/rien/reStream/pull/43.patch";
+      sha256 = "029m2jfxrscsaa9flq0c4asvs96wr3xv2rw2cr9yz4jg7hswdwmb";
+    })
+  ];
 
   nativeBuildInputs = [ makeWrapper ];
 
