@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   patches = [
     (fetchpatch {
       url = "https://github.com/rien/reStream/pull/43.patch";
-      sha256 = "029m2jfxrscsaa9flq0c4asvs96wr3xv2rw2cr9yz4jg7hswdwmb";
+      sha256 = "sha256-IvZRNEQOdhbm+vjjLpV+hhe0MqQmi2pRz5D5uba+pto=";
     })
   ];
 
