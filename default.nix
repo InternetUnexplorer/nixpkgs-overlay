@@ -1,21 +1,21 @@
-self: super:
-let callPackageSuper = super.lib.callPackageWith (super);
+final: prev:
+let callPackagePrev = prev.lib.callPackageWith (prev);
 in {
   ##
   ## New Packages
   ##
-  breeze-enhanced = super.callPackage ./breeze-enhanced { };
-  breeze-mod-sddm-theme = super.callPackage ./breeze-mod-sddm-theme { };
-  gwe = super.callPackage ./gwe { };
-  luaformatter = super.callPackage ./luaformatter { };
-  nilium = super.callPackage ./nilium { };
-  oh-my-fish = super.callPackage ./oh-my-fish { };
-  reStream = super.callPackage ./reStream { };
+  breeze-enhanced = prev.callPackage ./breeze-enhanced { };
+  breeze-mod-sddm-theme = prev.callPackage ./breeze-mod-sddm-theme { };
+  gwe = prev.callPackage ./gwe { };
+  luaformatter = prev.callPackage ./luaformatter { };
+  nilium = prev.callPackage ./nilium { };
+  oh-my-fish = prev.callPackage ./oh-my-fish { };
+  reStream = prev.callPackage ./reStream { };
 
   ##
   ## Package Overrides
   ##
-  capitaine-cursors = callPackageSuper ./capitaine-cursors { };
-  inconsolata = callPackageSuper ./inconsolata { };
-  multimc = callPackageSuper ./multimc { };
+  capitaine-cursors = callPackagePrev ./capitaine-cursors { };
+  inconsolata = callPackagePrev ./inconsolata { };
+  multimc = callPackagePrev ./multimc { };
 }
