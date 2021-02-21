@@ -11,7 +11,8 @@ stdenv.mkDerivation rec {
     sha256 = "1yrdnb9yq5n41j2g144qgv3bbbp3vfpq9c8bzdyh17v56ipbz9zq";
   };
 
-  nativeBuildInputs = [ cmake extra-cmake-modules ];
+  nativeBuildInputs =
+    [ cmake extra-cmake-modules plasma5Packages.wrapQtAppsHook ];
   buildInputs = [
     plasma5Packages.kdecoration
     plasma5Packages.frameworkintegration
