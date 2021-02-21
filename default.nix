@@ -15,7 +15,6 @@ in {
   ##
   ## Package Overrides
   ##
-  capitaine-cursors = callPackagePrev ./capitaine-cursors { };
   inconsolata = callPackagePrev ./inconsolata { };
   multimc = callPackagePrev ./multimc { };
 }
