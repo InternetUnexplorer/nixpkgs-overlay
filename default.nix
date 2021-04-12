@@ -7,6 +7,7 @@ in {
   breeze-enhanced = prev.callPackage ./breeze-enhanced { };
   breeze-mod-sddm-theme = prev.callPackage ./breeze-mod-sddm-theme { };
   gwe = prev.callPackage ./gwe { };
+  lightly = prev.callPackage ./lightly { };
   luaformatter = prev.callPackage ./luaformatter { };
   nilium = prev.callPackage ./nilium { };
   oh-my-fish = prev.callPackage ./oh-my-fish { };
