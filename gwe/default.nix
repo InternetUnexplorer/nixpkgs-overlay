@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, fetchFromGitLab, meson, ninja, fetchgit, python3
+{ stdenv, lib, fetchurl, fetchFromGitLab, meson, ninja, fetchgit, python3
 , gobject-introspection, pkgconfig, gtk3, pango, glib, desktop-file-utils
 , wrapGAppsHook, libdazzle, libnotify, libappindicator }:
 
@@ -6,14 +6,14 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "gwe";
-  version = "0.15.2";
+  version = "0.15.3";
   format = "other";
 
   src = fetchFromGitLab {
     owner = "leinardi";
     repo = "gwe";
     rev = version;
-    sha256 = "02sh6gzh9q4y8d8mfyg00g00xc3icg7c8822r1svj1ic1xlf5bj0";
+    hash = "sha256-P91ezv+1ywQ3oHY21aI2VlmFWFebP2Y4enQCKcATzf4=";
   };
 
   nativeBuildInputs =
@@ -60,7 +60,7 @@ python3.pkgs.buildPythonApplication rec {
       --replace 'from py3nvml.py3nvml import' 'from pynvml import'
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description =
       "System utility designed to provide information, control the fans and overclock your NVIDIA card";
     homepage = "https://gitlab.com/leinardi/gwe";
