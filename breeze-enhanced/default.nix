@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "breeze-enhanced";
-  version = "5.19";
+  version = "5.20";
 
   src = fetchFromGitHub {
     owner = "tsujan";
     repo = "BreezeEnhanced";
     rev = "V${version}";
-    hash = "sha256-Y0rN6AFIVSuUG0mwzv8nVK8HdK/fkb9o7JEjyUx8AdI=";
+    hash = "sha256-a64/hSFJnmr1sF+5ThLpjtQFFbglKFQ6sm75KxSbChA=";
   };
 
   nativeBuildInputs =
