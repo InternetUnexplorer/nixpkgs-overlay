@@ -10,6 +10,8 @@ in {
   luaformatter = prev.callPackage ./luaformatter { };
   nilium = prev.callPackage ./nilium { };
   oh-my-fish = prev.callPackage ./oh-my-fish { };
+  plasma5-wallpapers-dynamic =
+    prev.callPackage ./plasma5-wallpapers-dynamic { };
   reStream = prev.callPackage ./reStream { };
 
   ##
