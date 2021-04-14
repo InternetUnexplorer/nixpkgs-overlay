@@ -1,0 +1,28 @@
+commit 1505919f0570fe062d261e747cb69756cbd76f70
+Author: InternetUnexplorer <internetunexplorer@gmail.com>
+Date:   Tue Apr 13 19:52:31 2021 -0700
+
+    Let MODULEPATH and DATAPATH be set externally
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2e0d1f2..3936461 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -50,8 +50,6 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+ find_package(X11 REQUIRED)
+ find_package(XCB REQUIRED)
+ 
+-execute_process(COMMAND kf5-config --install module OUTPUT_VARIABLE MODULEPATH OUTPUT_STRIP_TRAILING_WHITESPACE)
+-
+ find_path(EFFECTS_H kwineffects.h PATH_SUFFIXES kf5)
+ 
+ if (EFFECTS_H)
+@@ -113,8 +111,6 @@ install(TARGETS ${LIGHTLYSHADERS} DESTINATION ${MODULEPATH}/kwin/effects/plugins
+ # execute_process(COMMAND kf5-config --install services OUTPUT_VARIABLE SERVICEPATH OUTPUT_STRIP_TRAILING_WHITESPACE)
+ #install(FILES lightlyshaders.desktop DESTINATION ${SERVICEPATH}/kwin)
+ 
+-execute_process(COMMAND kf5-config --install data OUTPUT_VARIABLE DATAPATH OUTPUT_STRIP_TRAILING_WHITESPACE)
+-
+ install(FILES shaders_140/lightlyshaders.frag DESTINATION ${DATAPATH}/kwin/shaders/1.40)
+ install(FILES shaders_110/lightlyshaders.frag DESTINATION ${DATAPATH}/kwin/shaders/1.10)
+ 
