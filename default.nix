@@ -14,9 +14,4 @@ in {
   plasma5-wallpapers-dynamic =
     prev.callPackage ./plasma5-wallpapers-dynamic { };
   reStream = prev.callPackage ./reStream { };
-
-  ##
-  ## Package Overrides
-  ##
-  inconsolata = callPackagePrev ./inconsolata { };
 }
