@@ -20,5 +20,4 @@ in {
   ## Package Overrides
   ##
   inconsolata = callPackagePrev ./inconsolata { };
-  multimc = callPackagePrev ./multimc { };
 }
