@@ -26,9 +26,10 @@ in stdenv.mkDerivation {
     libheif
   ];
 
-  meta = {
+  meta = with lib; {
     description = "Dynamic wallpaper plugin for KDE Plasma";
     homepage = "https://github.com/zzag/plasma5-wallpapers-dynamic";
-    license = with lib.licenses; [ bsd3 cc-by-sa-40 cc0 gpl3Plus lgpl3Plus ];
+    license = with licenses; [ bsd3 cc-by-sa-40 cc0 gpl3Plus lgpl3Plus ];
+    platforms = platforms.linux;
   };
 }

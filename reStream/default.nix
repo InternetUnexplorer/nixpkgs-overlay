@@ -28,9 +28,10 @@ stdenv.mkDerivation rec {
       --set PATH ${lib.makeBinPath [ coreutils lz4 ffmpeg-full openssh ]}
   '';
 
-  meta = {
+  meta = with lib; {
     description = "Stream your reMarkable screen over SSH";
     inherit (src.meta) homepage;
-    license = "MIT";
+    license = licenses.MIT;
+    platforms = platforms.linux ++ platforms.darwin;
   };
 }

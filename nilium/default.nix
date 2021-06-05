@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub }:
+{ stdenv, lib, fetchFromGitHub }:
 
 let
   pname = "nilium";
@@ -17,9 +17,10 @@ in stdenv.mkDerivation rec {
     cp -a Nilium $out/
   '';
 
-  meta = {
+  meta = with lib; {
     description = "Nilium is a dark theme designed from scratch for Plasma 5";
     homepage = "https://github.com/mcder3/Nilium-Plasma-Theme/";
-    license = "CC-BY-SA-4.0";
+    license = licenses.cc-by-sa-40;
+    platforms = platforms.linux;
   };
 }

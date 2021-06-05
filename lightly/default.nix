@@ -23,9 +23,10 @@ in stdenv.mkDerivation {
     plasma5Packages.qtx11extras
   ];
 
-  meta = {
+  meta = with lib; {
     description = " A modern style for qt applications";
     homepage = "https://github.com/Luwx/Lightly";
-    license = lib.licenses.gpl2;
+    license = licenses.gpl2;
+    platforms = platforms.linux;
   };
 }

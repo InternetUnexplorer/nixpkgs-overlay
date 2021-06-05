@@ -40,8 +40,9 @@ in stdenv.mkDerivation {
     "-DDATAPATH=share"
   ];
 
-  meta = {
+  meta = with lib; {
     description = "Round corners and outline effect for kwin";
     homepage = "https://github.com/Luwx/LightlyShaders";
+    platforms = platforms.linux;
   };
 }
