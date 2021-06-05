@@ -12,9 +12,10 @@
           overlays = [ self.overlay ];
         };
 
-        packages =
-          pkgs.lib.genAttrs (import ./packages.nix { inherit (pkgs) lib; })
-          (name: pkgs.${name});
+        isSupported = _: drv: builtins.elem system drv.meta.platforms;
+        packages = pkgs.lib.filterAttrs isSupported
+          (pkgs.lib.genAttrs (import ./packages.nix { inherit (pkgs) lib; })
+            (name: pkgs.${name}));
 
         isApp = _: drv: pkgs.lib.hasAttrByPath [ "passthru" "exePath" ] drv;
         apps =
