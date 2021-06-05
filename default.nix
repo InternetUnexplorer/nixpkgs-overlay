@@ -1,9 +1,8 @@
 final: prev:
+
 let callPackagePrev = prev.lib.callPackageWith (prev);
+
 in {
-  ##
-  ## New Packages
-  ##
   breeze-enhanced = prev.callPackage ./breeze-enhanced { };
   gwe = prev.callPackage ./gwe { };
   lightly = prev.callPackage ./lightly { };
