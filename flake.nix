@@ -9,11 +9,8 @@
       };
     in {
       overlay = import ./default.nix;
-
-      packages.x86_64-linux = {
-        inherit (pkgs)
-          breeze-enhanced lightly lightly-shaders luaformatter nilium
-          plasma5-wallpapers-dynamic reStream;
-      };
+      packages.x86_64-linux =
+        pkgs.lib.genAttrs (import ./packages.nix { inherit (pkgs) lib; })
+        (name: pkgs.${name});
     };
 }
