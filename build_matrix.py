@@ -45,5 +45,4 @@ if __name__ == "__main__":
         print(" ", path)
     print()
 
-    matrix = {"package": packages_to_build}
-    print("::set-output", f"name=matrix::{json.dumps(matrix)}")
+    print("::set-output", f"name=packages::{json.dumps(packages_to_build)}")
