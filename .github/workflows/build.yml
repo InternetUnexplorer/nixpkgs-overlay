@@ -51,4 +51,4 @@ jobs:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         pushFilter: '^nixexprs\.tar\.xz$'
 
-    - run: nix build .#${{ matrix.package }} --override-input nixpkgs nixpkgs/nixpkgs-unstable
+    - run: nix build .#${{ matrix.package }} --update-input nixpkgs
