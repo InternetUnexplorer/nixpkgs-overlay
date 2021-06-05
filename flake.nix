@@ -12,7 +12,7 @@
 
       packages.x86_64-linux = {
         inherit (pkgs)
-          breeze-enhanced gwe lightly lightly-shaders luaformatter nilium
+          breeze-enhanced lightly lightly-shaders luaformatter nilium
           plasma5-wallpapers-dynamic reStream;
       };
     };
