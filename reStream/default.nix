@@ -28,10 +28,12 @@ stdenv.mkDerivation rec {
       --set PATH ${lib.makeBinPath [ coreutils lz4 ffmpeg-full openssh ]}
   '';
 
+  passthru.exePath = "/bin/reStream";
+
   meta = with lib; {
     description = "Stream your reMarkable screen over SSH";
     inherit (src.meta) homepage;
-    license = licenses.MIT;
+    license = licenses.mit;
     platforms = platforms.linux ++ platforms.darwin;
   };
 }
