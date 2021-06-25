@@ -1,7 +1,7 @@
 {
   description = "InternetUnexplorer's nixpkgs overlays";
 
-  inputs.nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+  inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   outputs = { self, nixpkgs, flake-utils }:
