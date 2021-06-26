@@ -12,7 +12,16 @@ BINARY_CACHE_URLS = [
 
 
 def get_packages() -> Dict[str, str]:
-    output = check_output(["nix", "eval", "--json", ".#packages.x86_64-linux"])
+    output = check_output(
+        [
+            "nix",
+            "eval",
+            "--update-input",
+            "nixpkgs",
+            "--json",
+            ".#packages.x86_64-linux",
+        ]
+    )
     return json.loads(output)
 
 
