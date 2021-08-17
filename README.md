@@ -9,7 +9,10 @@ binary cache][1].
 
 ### License
 
-The file `pulseeffects/pulseeffects.nix` was taken from nixpkgs and is subject to the [nixpkgs license][2].
+The following files were taken from nixpkgs and are subject to the [nixpkgs license][2]:
+
+- `ksysguard/default.nix`
+- `pulseeffects/pulseeffects.nix`
 
 All other files are licensed under [CC0][3].
 
