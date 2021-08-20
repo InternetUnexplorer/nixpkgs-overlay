@@ -16,8 +16,7 @@ def get_packages() -> Dict[str, str]:
         [
             "nix",
             "eval",
-            "--update-input",
-            "nixpkgs",
+            "--recreate-lock-file",
             "--json",
             ".#packages.x86_64-linux",
         ]
