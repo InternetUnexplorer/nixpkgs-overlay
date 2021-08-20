@@ -1,5 +1,5 @@
-{ stdenv, lib, fetchFromGitHub, cmake, extra-cmake-modules, plasma5Packages
-, libexif, libheif }:
+{ stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages, libexif
+, libheif }:
 
 let
   pname = "plasma5-wallpapers-dynamic";
@@ -9,26 +9,25 @@ in stdenv.mkDerivation {
 
   src = fetchFromGitHub {
     owner = "zzag";
-    repo = "plasma5-wallpapers-dynamic";
+    repo = pname;
     rev = version;
     hash = "sha256-jpNTvV7XX5lOht3PwkPq101XV1ehLAxBladVZZQUsSE=";
   };
 
-  nativeBuildInputs =
-    [ cmake extra-cmake-modules plasma5Packages.wrapQtAppsHook ];
+  nativeBuildInputs = [ extra-cmake-modules plasma5Packages.wrapQtAppsHook ];
 
-  buildInputs = [
-    plasma5Packages.qtbase
-    plasma5Packages.qtdeclarative
-    plasma5Packages.qtlocation
-    plasma5Packages.plasma-framework
+  buildInputs = with plasma5Packages; [
+    plasma-framework
+    qtbase
+    qtdeclarative
+    qtlocation
     libexif
     libheif
   ];
 
   meta = with lib; {
     description = "Dynamic wallpaper plugin for KDE Plasma";
-    homepage = "https://github.com/zzag/plasma5-wallpapers-dynamic";
+    inherit (src.meta) homepage;
     license = with licenses; [ bsd3 cc-by-sa-40 cc0 gpl3Plus lgpl3Plus ];
     platforms = platforms.linux;
   };

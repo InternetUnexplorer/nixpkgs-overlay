@@ -1,13 +1,15 @@
 { stdenv, lib, fetchFromGitHub, fetchpatch, makeWrapper, coreutils, lz4
 , ffmpeg-full, openssh }:
 
-stdenv.mkDerivation rec {
+let
   pname = "reStream";
   version = "1.1";
+in stdenv.mkDerivation {
+  inherit pname version;
 
   src = fetchFromGitHub {
     owner = "rien";
-    repo = "reStream";
+    repo = pname;
     rev = version;
     sha256 = "18z17chl7r5dg12xmr3f9gbgv97nslm8nijigd03iysaj6dhymp3";
   };

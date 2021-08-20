@@ -1,6 +1,6 @@
 { stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "breeze-enhanced";
   version = "5.22";
 
