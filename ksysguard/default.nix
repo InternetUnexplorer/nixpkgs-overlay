@@ -36,6 +36,8 @@ in stdenv.mkDerivation {
     lm_sensors
   ];
 
+  passthru.exePath = "/bin/ksysguard";
+
   meta = with lib; {
     description = "Resource usage monitor for your computer";
     homepage = "https://apps.kde.org/ksysguard";
