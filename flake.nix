@@ -1,8 +1,16 @@
 {
   description = "InternetUnexplorer's nixpkgs overlays";
 
-  inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs = {
+    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
+
+  nixConfig = {
+    extra-substituters = "https://internetunexplorer.cachix.org";
+    extra-trusted-public-keys =
+      "internetunexplorer.cachix.org-1:F6CYMkx5/TJmDQQ+DTsFzRy58Ad+doYEW5CdVDZJVdY=";
+  };
 
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
