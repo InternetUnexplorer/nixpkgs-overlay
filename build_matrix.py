@@ -42,15 +42,20 @@ def get_packages_to_build(packages: Dict[str, str]) -> List[str]:
 if __name__ == "__main__":
     packages = get_packages()
 
-    print("PACKAGES IN FLAKE:")
+    BLUE, RESET = "\033[34m", "\033[0m"
+
+    print()
+    print(f"{BLUE}---- Packages in flake -------------------------------------{RESET}")
     for path in packages.values():
         print(" ", path)
     print()
 
     packages_to_build = get_packages_to_build(packages)
-    print("PACKAGES TO BE BUILT:")
+    print(f"{BLUE}---- Packages to be built ----------------------------------{RESET}")
     for path in [packages[name] for name in packages_to_build]:
         print(" ", path)
+    if not packages_to_build:
+        print("  (none)")
     print()
 
     print("::set-output", f"name=packages::{json.dumps(packages_to_build)}")
