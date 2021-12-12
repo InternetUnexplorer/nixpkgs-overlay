@@ -3,15 +3,14 @@
 let
   pname = "nilium";
   version = "4.0.2";
-in stdenv.mkDerivation {
-  inherit pname version;
-
   src = fetchFromGitHub {
     owner = "InternetUnexplorer";
     repo = "Nilium-Plasma-Theme";
     rev = version;
     hash = "sha256-6mUfvj4WTq4vmkyx/jcFWAWt9FLdxONApz42XZibP5c=";
   };
+in stdenv.mkDerivation {
+  inherit pname version src;
 
   installPhase = ''
     cp -a Nilium $out/
