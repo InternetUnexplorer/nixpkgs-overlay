@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.4.0
 
-    - uses: cachix/install-nix-action@v15
+    - uses: cachix/install-nix-action@v16
 
     - id: matrix
       run: ./build_matrix.py
@@ -33,7 +33,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.4.0
 
-    - uses: cachix/install-nix-action@v15
+    - uses: cachix/install-nix-action@v16
 
     - uses: cachix/cachix-action@v10
       with:
@@ -57,7 +57,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.4.0
 
-    - uses: cachix/install-nix-action@v15
+    - uses: cachix/install-nix-action@v16
 
     - run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
