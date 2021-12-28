@@ -28,7 +28,7 @@ in stdenv.mkDerivation {
     wrapGAppsHook
   ];
 
-  buildInputs = [ glib gtk3 dbus_tools help2man ];
+  buildInputs = [ glib gtk3 dbus_tools.dev help2man ];
 
   dontConfigure = true;
 
