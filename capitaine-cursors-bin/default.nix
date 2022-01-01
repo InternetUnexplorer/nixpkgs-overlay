@@ -3,15 +3,14 @@
 let
   pname = "capitaine-cursors-bin";
   version = "3";
-in stdenv.mkDerivation {
-  inherit pname version;
-
   src = fetchFromGitHub {
     owner = "keeferrourke";
     repo = "capitaine-cursors";
     rev = "r${version}";
     hash = "sha256-u72yHbVivdn0Rm2Gvz80ZiQKC2ZyMbN9vmjbZHNdzl4=";
   };
+in stdenv.mkDerivation {
+  inherit pname version src;
 
   installPhase = ''
     mkdir -pm 0755 $out/share/icons
