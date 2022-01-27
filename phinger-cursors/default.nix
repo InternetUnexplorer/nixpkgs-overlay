@@ -1,10 +1,10 @@
-{ stdenv, lib, fetchurl }:
+{ stdenvNoCC, lib, fetchurl }:
 
 let
   pname = "phinger-cursors";
   version = "1.1";
   repo = "https://github.com/phisch/phinger-cursors";
-in stdenv.mkDerivation {
+in stdenvNoCC.mkDerivation {
   inherit pname version;
 
   src = fetchurl {
@@ -13,8 +13,6 @@ in stdenv.mkDerivation {
   };
 
   sourceRoot = ".";
-  dontConfigure = true;
-  dontBuild = true;
 
   installPhase = ''
     install -Ddm755 "$out/share/icons"
