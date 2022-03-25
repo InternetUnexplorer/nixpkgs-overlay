@@ -17,7 +17,7 @@
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ self.overlay ];
+          overlays = [ self.overlays.default ];
         };
 
         isSupported = _: drv: builtins.elem system drv.meta.platforms;
@@ -33,6 +33,6 @@
       in { inherit apps packages; }
 
     ) // {
-      overlay = import ./default.nix;
+      overlays.default = import ./default.nix;
     };
 }
