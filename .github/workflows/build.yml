@@ -11,7 +11,7 @@ jobs:
       packages: ${{ steps.matrix.outputs.packages }}
 
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3
 
     - uses: cachix/install-nix-action@v16
 
@@ -31,7 +31,7 @@ jobs:
       fail-fast: false
 
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3
 
     - uses: cachix/install-nix-action@v16
 
@@ -55,7 +55,7 @@ jobs:
       && github.event_name == 'repository_dispatch'
 
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3
 
     - uses: cachix/install-nix-action@v16
 

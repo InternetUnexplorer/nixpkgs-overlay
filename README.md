@@ -11,6 +11,7 @@ binary cache][1].
 
 The following files were taken from nixpkgs and are subject to the [nixpkgs license][2]:
 
+- `blender_2_93/blender_2_93.nix`
 - `ksysguard/default.nix`
 - `pulseeffects/pulseeffects.nix`
 

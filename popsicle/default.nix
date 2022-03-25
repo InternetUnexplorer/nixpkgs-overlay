@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchFromGitHub, rustPlatform, pkg-config, glib, gtk3, dbus_tools
+{ stdenv, lib, fetchFromGitHub, rustPlatform, pkg-config, glib, gtk3, dbus
 , help2man, wrapGAppsHook }:
 
 let
@@ -28,7 +28,7 @@ in stdenv.mkDerivation {
     wrapGAppsHook
   ];
 
-  buildInputs = [ glib gtk3 dbus_tools.dev help2man ];
+  buildInputs = [ glib gtk3 dbus.dev help2man ];
 
   dontConfigure = true;
 
