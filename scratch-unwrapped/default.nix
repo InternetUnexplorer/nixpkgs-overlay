@@ -1,8 +1,9 @@
-{ stdenv, lib, fetchurl, pkg-config, pango, squeak, installShellFiles }:
+{ stdenv, lib, callPackage, fetchurl, pkg-config, pango, installShellFiles }:
 
 let
   pname = "scratch-unwrapped";
   version = "1.4.0.7";
+  squeak = callPackage ../squeak_4_10 { };
 in stdenv.mkDerivation {
   inherit pname version;
 
