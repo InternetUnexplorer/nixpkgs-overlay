@@ -13,7 +13,6 @@ The following files were taken from nixpkgs and are subject to the [nixpkgs lice
 
 - `blender_2_93/blender_2_93.nix`
 - `ksysguard/default.nix`
-- `pulseeffects/pulseeffects.nix`
 - `squeak_4_10/squeak_4_10.nix`
 
 All other files are licensed under [CC0][3].
