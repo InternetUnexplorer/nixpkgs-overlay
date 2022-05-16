@@ -1,10 +1,8 @@
 { stdenvNoCC, lib, fetchFromGitHub }:
 
-let
+stdenvNoCC.mkDerivation rec {
   pname = "nilium";
   version = "4.2.0";
-in stdenvNoCC.mkDerivation {
-  inherit pname version;
 
   src = fetchFromGitHub {
     owner = "InternetUnexplorer";

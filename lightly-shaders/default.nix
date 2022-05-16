@@ -1,7 +1,7 @@
 { stdenv, lib, fetchFromGitHub, cmake, extra-cmake-modules, plasma5Packages
 , epoxy }:
 
-let
+stdenv.mkDerivation rec {
   pname = "LightlyShaders";
   version = "20220130";
 
@@ -11,8 +11,6 @@ let
     rev = "1a86e5082587348f386a713bb73776c6916825cb";
     hash = "sha256-a6OFp/np+mF3UvR9pEw1O/s0MSDI3Ma4IlbX6gi+Fkc=";
   };
-in stdenv.mkDerivation {
-  inherit pname version src;
 
   nativeBuildInputs =
     [ cmake extra-cmake-modules plasma5Packages.wrapQtAppsHook ];

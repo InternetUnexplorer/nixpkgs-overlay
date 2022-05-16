@@ -1,11 +1,10 @@
 { stdenv, lib, fetchurl, pkg-config, hidapi, libusb }:
 
-let
+let repo = "https://github.com/wuxx/icesugar";
+
+in stdenv.mkDerivation rec {
   pname = "icesprog";
   version = "1.1b";
-  repo = "https://github.com/wuxx/icesugar";
-in stdenv.mkDerivation {
-  inherit pname version;
 
   src = fetchurl {
     url = "${repo}/raw/v${version}/tools/src/icesprog.c";

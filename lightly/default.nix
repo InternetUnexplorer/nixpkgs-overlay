@@ -1,10 +1,8 @@
 { stdenv, lib, fetchFromGitHub, cmake, extra-cmake-modules, plasma5Packages }:
 
-let
+stdenv.mkDerivation rec {
   pname = "Lightly";
   version = "20211117";
-in stdenv.mkDerivation {
-  inherit pname version;
 
   src = fetchFromGitHub {
     owner = "Luwx";
@@ -24,8 +22,8 @@ in stdenv.mkDerivation {
   ];
 
   meta = with lib; {
-    description = " A modern style for qt applications";
-    homepage = "https://github.com/Luwx/Lightly";
+    description = " A modern style for Qt applications";
+    inherit (src.meta) homepage;
     license = licenses.gpl2;
     platforms = platforms.linux;
   };

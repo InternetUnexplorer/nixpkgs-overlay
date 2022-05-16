@@ -1,16 +1,15 @@
 { stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages }:
 
-let
+stdenv.mkDerivation rec {
   pname = "classik";
   version = "3.0.breeze5.23.80";
+
   src = fetchFromGitHub {
     owner = "paulmcauley";
-    repo = pname;
+    repo = "classik";
     rev = version;
     hash = "sha256-OvekLjHTwfMLwt3RKrC3ls15/B2BpfeIkwZH2z3b+qk=";
   };
-in stdenv.mkDerivation {
-  inherit pname version src;
 
   outputs = [ "bin" "dev" "out" ];
 

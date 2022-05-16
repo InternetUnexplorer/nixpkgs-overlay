@@ -7,19 +7,16 @@
 # didn't know about the existence of the other overlay until I had written this
 # one, this is still licensed under CC-0 (although the two are very similar!).
 
-let
+rustPlatform.buildRustPackage rec {
   pname = "license";
   version = "2.6.1";
 
   src = fetchFromSourcehut {
     owner = "~zethra";
-    repo = pname;
+    repo = "license";
     rev = version;
     hash = "sha256-39W8Jagj656rivWlNWUr7qNeDQtaBdJYUzwYucZhr5o=";
   };
-
-in rustPlatform.buildRustPackage {
-  inherit pname version src;
 
   nativeBuildInputs = [ scdoc makeWrapper installShellFiles ];
 

@@ -1,17 +1,16 @@
 { stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages, libexif
 , libheif }:
 
-let
+stdenv.mkDerivation rec {
   pname = "plasma5-wallpapers-dynamic";
   version = "3.3.9";
+
   src = fetchFromGitHub {
     owner = "zzag";
-    repo = pname;
+    repo = "plasma5-wallpapers-dynamic";
     rev = version;
     hash = "sha256-jpNTvV7XX5lOht3PwkPq101XV1ehLAxBladVZZQUsSE=";
   };
-in stdenv.mkDerivation {
-  inherit pname version src;
 
   nativeBuildInputs = [ extra-cmake-modules plasma5Packages.wrapQtAppsHook ];
 

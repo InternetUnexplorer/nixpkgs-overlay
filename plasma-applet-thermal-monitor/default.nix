@@ -7,7 +7,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitLab {
     owner = "agurenko";
-    repo = pname;
+    repo = "plasma-applet-thermal-monitor";
     rev = version;
     hash = "sha256-M8Z8wKyxqLHaX+8ZbzjOKkY4a7cH0ZMVhqYkZyuXXTc=";
   };
