@@ -16,7 +16,7 @@ stdenvNoCC.mkDerivation rec {
     cp -r Nilium $out/share/plasma/desktoptheme
   '';
 
-  passthru.autoUpdate = "github-releases";
+  passthru.autoUpdate = "git-tags";
 
   meta = with lib; {
     description = "A dark theme designed from scratch for Plasma 5";
