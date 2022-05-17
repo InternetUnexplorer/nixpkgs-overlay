@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "Lightly";
-  version = "20211117";
+  version = "unstable-2022-05-02";
 
   src = fetchFromGitHub {
     owner = "Luwx";
     repo = "Lightly";
-    rev = "4a918fee87ed37b165c209c4857e8ed473f00acb";
-    hash = "sha256-K0Zw4BOwT1esDMl4p8y6HjPUCdr8JHNKFdVQVk63nwo=";
+    rev = "121a61e5b67e5122449c80301e41b4de3649b0d5";
+    hash = "sha256-UmttzKFkuZupFpBrTQYIsLCpNRLcd5CkabQN5n5zkJQ=";
   };
 
   nativeBuildInputs =
