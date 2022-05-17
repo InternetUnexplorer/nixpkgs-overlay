@@ -23,6 +23,8 @@ stdenv.mkDerivation rec {
     libheif
   ];
 
+  passthru.autoUpdate = "github-releases";
+
   meta = with lib; {
     description = "Dynamic wallpaper plugin for KDE Plasma";
     inherit (src.meta) homepage;

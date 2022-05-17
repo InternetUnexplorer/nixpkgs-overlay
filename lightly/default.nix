@@ -21,6 +21,8 @@ stdenv.mkDerivation rec {
     plasma5Packages.qtx11extras
   ];
 
+  passthru.autoUpdate = "git-commits";
+
   meta = with lib; {
     description = " A modern style for Qt applications";
     inherit (src.meta) homepage;

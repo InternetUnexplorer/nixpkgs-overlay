@@ -14,6 +14,8 @@ stdenvNoCC.mkDerivation rec {
   nativeBuildInputs = [ meson ninja ];
   buildInputs = [ sassc ];
 
+  passthru.autoUpdate = "github-releases";
+
   meta = with lib; {
     description = " The theme from libadwaita ported to GTK 3";
     inherit (src.meta) homepage;

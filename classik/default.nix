@@ -30,6 +30,8 @@ stdenv.mkDerivation rec {
     qtx11extras
   ];
 
+  passthru.autoUpdate = "github-releases";
+
   meta = with lib; {
     description =
       "A highly customizable binary Window Decoration and Application Style plugin for recent versions of the KDE Plasma desktop";

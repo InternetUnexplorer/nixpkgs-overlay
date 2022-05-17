@@ -16,6 +16,8 @@ stdenv.mkDerivation rec {
 
   buildInputs = [ plasma5Packages.plasma-workspace ];
 
+  passthru.autoUpdate = "git-commits";
+
   meta = with lib; {
     description =
       "Plasma 5 applet for monitoring CPU, GPU and other available temperature sensors";

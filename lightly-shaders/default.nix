@@ -38,6 +38,8 @@ stdenv.mkDerivation rec {
     "-DDATAPATH=share"
   ];
 
+  passthru.autoUpdate = "git-commits";
+
   meta = with lib; {
     description = "Round corners and outline effect for kwin";
     inherit (src.meta) homepage;

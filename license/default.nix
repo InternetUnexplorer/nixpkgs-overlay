@@ -40,7 +40,10 @@ rustPlatform.buildRustPackage rec {
       --zsh completions/_license
   '';
 
-  passthru.exePath = "/bin/license";
+  passthru = {
+    autoUpdate = "git-tags";
+    exePath = "/bin/license";
+  };
 
   meta = with lib; {
     description = "A tool to easily add a license to your project";

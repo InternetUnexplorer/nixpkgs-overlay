@@ -19,6 +19,8 @@ stdenv.mkDerivation rec {
     qtx11extras
   ];
 
+  passthru.autoUpdate = "git-commits";
+
   meta = with lib; {
     description = "A fork of KDE Breeze decoration with additional options";
     inherit (src.meta) homepage;
