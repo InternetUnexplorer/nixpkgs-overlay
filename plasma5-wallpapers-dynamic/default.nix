@@ -1,5 +1,5 @@
-{ stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages, libexif
-, libheif }:
+{ stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages, libavif
+, libexif }:
 
 stdenv.mkDerivation rec {
   pname = "plasma5-wallpapers-dynamic";
@@ -19,8 +19,8 @@ stdenv.mkDerivation rec {
     qtbase
     qtdeclarative
     qtlocation
+    libavif
     libexif
-    libheif
   ];
 
   passthru.autoUpdate = "github-releases";
