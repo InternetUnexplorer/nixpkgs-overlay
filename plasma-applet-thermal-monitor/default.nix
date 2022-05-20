@@ -3,12 +3,12 @@
 
 stdenv.mkDerivation rec {
   pname = "plasma-applet-thermal-monitor";
-  version = "a0f577ee6cfb3c4db41951303144adeef3b11250";
+  version = "unstable-2021-11-15";
 
   src = fetchFromGitLab {
     owner = "agurenko";
     repo = "plasma-applet-thermal-monitor";
-    rev = version;
+    rev = "a0f577ee6cfb3c4db41951303144adeef3b11250";
     hash = "sha256-pJ6zeT9GJ42qQ2+3lykfsFdcveQsvKwr48ZcivaOgtk=";
   };
 
