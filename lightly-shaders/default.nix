@@ -3,13 +3,13 @@
 
 stdenv.mkDerivation rec {
   pname = "LightlyShaders";
-  version = "unstable-2022-05-20";
+  version = "unstable-2022-05-29";
 
   src = fetchFromGitHub {
     owner = "a-parhom";
     repo = "LightlyShaders";
-    rev = "0294499afece1620f47fa38fa74fa8604077347f";
-    hash = "sha256-8EL1e4YKY63U7kvqBLfqSzYHdls1BD6OYh4X5+B7EcQ=";
+    rev = "252ddb6f9ff2ed317ce148bfa0668bdf5827c608";
+    hash = "sha256-BPTrnvofO++2FGLPukEJ1Oc6qb6Yumn3AR+Msx2ZbmE=";
   };
 
   nativeBuildInputs =
