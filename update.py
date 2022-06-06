@@ -169,6 +169,8 @@ def update_package_generic(
 
     if rev:
         current_rev = get_package_attr(pname, "src.rev")
+        assert tag_to_version(current_rev) != version, \
+            "rev cannot depend on version when using method git-commits!"
         print_change(" src.rev", current_rev, rev)
         set_package_attr(pname, "src.rev", current_rev, rev)
 
