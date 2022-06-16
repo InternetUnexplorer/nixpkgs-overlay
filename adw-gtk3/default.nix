@@ -11,8 +11,7 @@ stdenvNoCC.mkDerivation rec {
     hash = "sha256-gFyNbgOzX+WVo0MP+VQvxVTnLV7Bhgo1fUnjuAku/Sc=";
   };
 
-  nativeBuildInputs = [ meson ninja ];
-  buildInputs = [ sassc ];
+  nativeBuildInputs = [ meson ninja sassc ];
 
   passthru.autoUpdate = "github-releases";
 
