@@ -43,7 +43,8 @@ python3Packages.buildPythonApplication rec {
   doCheck = false;
 
   passthru = {
-    autoUpdate = "github-releases";
+    # TODO: needs special version regex
+    # autoUpdate = "github-releases";
     exePath = "/bin/pronterface.py";
   };
 
