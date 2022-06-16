@@ -17,7 +17,7 @@ stdenvNoCC.mkDerivation rec {
   passthru.autoUpdate = "github-releases";
 
   meta = with lib; {
-    description = " The theme from libadwaita ported to GTK 3";
+    description = "The theme from libadwaita ported to GTK 3";
     inherit (src.meta) homepage;
     license = licenses.lgpl21Only;
     platforms = platforms.linux;
