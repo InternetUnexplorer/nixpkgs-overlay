@@ -156,6 +156,9 @@ in stdenv.mkDerivation rec {
     "-DWITH_TBB=ON"
     "-DWITH_IMAGE_OPENJPEG=ON"
     "-DWITH_OPENCOLLADA=${if colladaSupport then "ON" else "OFF"}"
+    # Fix 'file RPATH_CHANGE could not write new RPATH'
+    # See: https://github.com/NixOS/nixpkgs/pull/108496
+    "-DCMAKE_SKIP_BUILD_RPATH=ON"
   ] ++ optionals stdenv.isDarwin [
     "-DWITH_CYCLES_OSL=OFF" # requires LLVM
     "-DWITH_OPENVDB=OFF" # OpenVDB currently doesn't build on darwin
