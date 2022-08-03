@@ -2,13 +2,13 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "printrun";
-  version = "2.0.0rc8";
+  version = "unstable-2022-05-09";
 
   src = fetchFromGitHub {
     owner = "kliment";
     repo = "Printrun";
-    rev = "printrun-${version}";
-    hash = "sha256-9vWlpyecumzQmb1h0MbVaHfZWmprkHHdAHUKW6HLfC8=";
+    rev = "10718fa31c277e35d93b67fc7075aa68cc79da3c";
+    hash = "sha256-tMfzzIktihuVRCc7KqVkVT7+bNQqlHGMdvAGQGD+e98=";
   };
 
   propagatedBuildInputs = with python3Packages; [
@@ -43,8 +43,7 @@ python3Packages.buildPythonApplication rec {
   doCheck = false;
 
   passthru = {
-    # TODO: needs special version regex
-    # autoUpdate = "github-releases";
+    autoUpdate = "git-commits";
     exePath = "/bin/pronterface.py";
   };
 
