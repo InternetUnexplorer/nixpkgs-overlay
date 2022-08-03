@@ -1,12 +1,12 @@
 { stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages }:
 
 stdenv.mkDerivation rec {
-  pname = "classik";
+  pname = "klassy";
   version = "3.0.breeze5.23.80";
 
   src = fetchFromGitHub {
     owner = "paulmcauley";
-    repo = "classik";
+    repo = "klassy";
     rev = version;
     hash = "sha256-OvekLjHTwfMLwt3RKrC3ls15/B2BpfeIkwZH2z3b+qk=";
   };
