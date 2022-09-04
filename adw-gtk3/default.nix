@@ -2,13 +2,13 @@
 
 stdenvNoCC.mkDerivation rec {
   pname = "adw-gtk3";
-  version = "3.6";
+  version = "3.7";
 
   src = fetchFromGitHub {
     owner = "lassekongo83";
     repo = "adw-gtk3";
     rev = "v${version}";
-    hash = "sha256-8SD3qnjtIAM40JLo7XZAri3QAA4ot8X1XUtdko1Iml4=";
+    hash = "sha256-hHmNRPUJOXa//aKgAYhGBVX6usRsObWbzcfOa1uwbqM=";
   };
 
   nativeBuildInputs = [ meson ninja sassc ];
