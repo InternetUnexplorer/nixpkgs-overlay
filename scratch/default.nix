@@ -1,4 +1,4 @@
-{ lib, symlinkJoin, buildFHSUserEnv, writeShellScriptBin, xdg_utils, callPackage
+{ lib, symlinkJoin, buildFHSUserEnv, writeShellScriptBin, xdg-utils, callPackage
 , unwrapped ? callPackage ../scratch-unwrapped { } }:
 
 # Scratch.image contains a bunch of references to /usr/share/scratch (example
@@ -10,7 +10,7 @@ let
   # /usr/share/scratch so that the help files can be opened correctly.
   xdg-open = writeShellScriptBin "xdg-open" ''
     FILE=$(echo $1 | sed 's|^/usr/share/scratch|${unwrapped}/share/scratch|g')
-    exec ${xdg_utils}/bin/xdg-open "$FILE"
+    exec ${xdg-utils}/bin/xdg-open "$FILE"
   '';
 
   scratch-fhs = buildFHSUserEnv {
