@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchurl, pkg-config, hidapi, libusb }:
+{ stdenv, lib, fetchurl, pkg-config, hidapi, libusb1 }:
 
 let repo = "https://github.com/wuxx/icesugar";
 
@@ -11,7 +11,7 @@ in stdenv.mkDerivation rec {
     hash = "sha256-LiaTFxT3+qH+iBDCqCwyMc21ttdcib6939C05IOze5w=";
   };
 
-  buildInputs = [ hidapi libusb ];
+  buildInputs = [ hidapi libusb1 ];
   nativeBuildInputs = [ pkg-config ];
 
   unpackPhase = ''
