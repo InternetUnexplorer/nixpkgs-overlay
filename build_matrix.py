@@ -52,16 +52,14 @@ def get_packages() -> Dict[str, Package]:
 
 
 def print_packages(title: str, packages: List[Package]) -> None:
-    BLUE, RESET = "\033[34m", "\033[0m"
-    print(BLUE + f"---- {title} ".ljust(60, "-") + RESET)
+    print(f"### {title}")
+    print()
     for package in packages or [None]:
-        print(f"  {package.path if package else '(none)'}")
+        print("-", package.path.replace("_", "\\_") if package else "_(none)_")
     print()
 
 
 if __name__ == "__main__":
-    print()
-
     packages = get_packages()
     print_packages("Packages in flake", list(packages.values()))
 

@@ -16,7 +16,7 @@ jobs:
       - uses: cachix/install-nix-action@v17
 
       - id: matrix
-        run: ./build_matrix.py
+        run: ./build_matrix.py | tee $GITHUB_STEP_SUMMARY
 
   build:
     name: ${{ matrix.package }}
