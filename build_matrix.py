@@ -3,8 +3,8 @@
 import json
 from dataclasses import dataclass
 from os import environ
-from subprocess import check_output, run, DEVNULL
-from typing import Dict, List
+from subprocess import DEVNULL, check_output, run
+from typing import Callable, Dict, List
 
 BINARY_CACHE_URLS = [
     "https://internetunexplorer.cachix.org",
@@ -51,28 +51,31 @@ def get_packages() -> Dict[str, Package]:
     return {name: Package(**fields) for name, fields in json.loads(output).items()}
 
 
+def filter_packages(
+    predicate: Callable[[Package], bool], packages: Dict[str, Package]
+) -> Dict[str, Package]:
+    return {name: package for name, package in packages.items() if predicate(package)}
+
+
 def print_packages(title: str, packages: List[Package]) -> None:
-    print(f"### {title}")
-    print()
+    print(f"———— {title} ".ljust(60, "—"))
     for package in packages or [None]:
-        print("-", package.path.replace("_", "\\_") if package else "_(none)_")
-    print()
+        print(f"- {package.path if package else '(none)'}")
 
 
 if __name__ == "__main__":
     packages = get_packages()
+    broken_packages = filter_packages(lambda package: package.broken, packages)
+    packages_to_build = filter_packages(Package.should_be_built, packages)
+
+    print("```text")
     print_packages("Packages in flake", list(packages.values()))
+    print()
+    print_packages("Packages marked as broken", list(broken_packages.values()))
+    print()
+    print_packages("Packages to be built", list(packages_to_build.values()))
+    print("```")
 
-    broken_packages = [name for name, package in packages.items() if package.broken]
-    print_packages(
-        "Packages marked as broken", [packages[name] for name in broken_packages]
-    )
-
-    packages_to_build = [
-        name for name, package in packages.items() if package.should_be_built()
-    ]
-    print_packages(
-        "Packages to be built", [packages[name] for name in packages_to_build]
-    )
-
-    print("::set-output", f"name=packages::{json.dumps(packages_to_build)}")
+    if "GITHUB_OUTPUT" in environ:
+        with open(environ["GITHUB_OUTPUT"], "a") as file:
+            print(f"packages={json.dumps(list(packages_to_build.keys()))}", file=file)

@@ -25,7 +25,11 @@ def colored(string: str, color: int) -> str:
 
 def set_output(name: str, value: Any) -> None:
     """Set an output for a GitHub actions step."""
-    print(f"::set-output name={name}::{json.dumps(value)}")
+    if not "GITHUB_OUTPUT" in environ:
+        print("warning: $GITHUB_OUTPUT not set")
+        return
+    with open(environ["GITHUB_OUTPUT"], "a") as file:
+        print(f"{name}={json.dumps(value)}", file=file)
 
 
 ################################################
@@ -236,19 +240,19 @@ def update_package_github_releases(pname: str) -> None:
 def get_supported_packages():
     """Output the names of packages that support auto-updates."""
     supported = []
-    print(colored("---- Packages supporting auto-updates ----------------------", BLUE))
+    print("```text")
+    print("———— Packages supporting auto-updates ——————————————————————")
     for pname, method in get_update_methods().items():
         if not method:
             continue
         package_file = get_package_file(pname)
         if not package_file:
             continue
-        print(f"  {pname}", end=" ")
-        print(f"({colored(package_file, BLUE)}, method {colored(method, GREEN)})")
+        print(f"- {pname} ({package_file}, method {method})")
         supported.append(pname)
     if not supported:
         print("  (none)")
-    print()
+    print("```")
     set_output("packages", supported)
 
 

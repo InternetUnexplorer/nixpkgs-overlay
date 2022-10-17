@@ -21,7 +21,7 @@ jobs:
       - uses: cachix/install-nix-action@v17
 
       - id: matrix
-        run: ./update.py matrix
+        run: ./update.py matrix | tee $GITHUB_STEP_SUMMARY
 
   update:
     name: ${{ matrix.package }}
@@ -48,7 +48,7 @@ jobs:
       - name: Check for existing pull request
         id: check-existing
         if: steps.update.outputs.pr-title != ''
-        run: echo "::set-output name=rev::$(git ls-remote origin ${{ fromJson(steps.update.outputs.pr-branch )}})"
+        run: echo "rev=$(git ls-remote origin ${{ fromJson(steps.update.outputs.pr-branch) }})" >> $GITHUB_OUTPUT
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
