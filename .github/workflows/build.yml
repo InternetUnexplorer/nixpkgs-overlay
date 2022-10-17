@@ -49,7 +49,10 @@ jobs:
     needs: build
 
     # See: https://github.com/actions/runner/issues/491
-    if: always() && (needs.build.result == 'success' || needs.build.result == 'skipped')
+    if: |
+      always()
+      && (needs.build.result == 'success' || needs.build.result == 'skipped')
+      && github.ref == 'refs/heads/main'
 
     steps:
       - uses: actions/checkout@v3
