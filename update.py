@@ -13,15 +13,6 @@ PACKAGES = ".#packages.x86_64-linux"
 
 ################################################
 
-GREEN, BLUE = 32, 34  # ANSI color escape codes
-
-
-def colored(string: str, color: int) -> str:
-    """Color `string` using ANSI escape codes."""
-    if "NO_COLOR" in environ.keys():
-        return string  # https://no-color.org/
-    return f"\x1b[{color}m{string}\x1b[0m"
-
 
 def set_output(name: str, value: Any) -> None:
     """Set an output for a GitHub actions step."""
@@ -160,21 +151,20 @@ def update_package_generic(
     current version."""
     current_version = get_package_attr(pname, "version")
     if current_version == version:
-        print(f"package {colored(pname, BLUE)} is already the latest version", end=" ")
-        print(f"({colored(version, GREEN)})")
+        print(f"package {pname} is already the latest version ({version})")
         return
 
     def print_change(name: str, old: str, new: str) -> None:
-        print(f"{colored(name, BLUE) + ':'}", end=" ")
-        print(f"{colored(old, GREEN)} -> {colored(new, GREEN)}")
+        print(f"{name}: {old} -> {new}")
 
     print_change(" version", current_version, version)
     set_package_attr(pname, "version", current_version, version)
 
     if rev:
         current_rev = get_package_attr(pname, "src.rev")
-        assert tag_to_version(current_rev) != version, \
-            "rev cannot depend on version when using method git-commits!"
+        assert (
+            tag_to_version(current_rev) != version
+        ), "rev cannot depend on version when using method git-commits!"
         print_change(" src.rev", current_rev, rev)
         set_package_attr(pname, "src.rev", current_rev, rev)
 
@@ -182,8 +172,6 @@ def update_package_generic(
     new_hash = get_url_hash(get_package_attr(pname, "src.url"))
     print_change("src.hash", current_hash, new_hash)
     set_package_attr(pname, "src.outputHash", current_hash, new_hash)
-
-    print()
 
     set_output("pr-branch", f"{pname}-{version}")
     set_output("pr-title", f"{pname}: {current_version} -> {version}")
@@ -268,11 +256,12 @@ if __name__ == "__main__":
         # `passthru.updateMethod` attr.
         pname = argv[2]
         method = get_update_methods()[pname]
-        print(f"updating package {colored(pname, BLUE)}", end=" ")
-        print(f"using method {colored(method, GREEN)}...")
+        print("```text")
+        print(f"updating package {pname} using method {method}...")
         update_fn = {
             "git-tags": update_package_git_tags,
             "git-commits": update_package_git_commits,
             "github-releases": update_package_github_releases,
         }[method]
         update_fn(pname)
+        print("```")

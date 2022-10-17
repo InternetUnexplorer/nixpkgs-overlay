@@ -42,7 +42,7 @@ jobs:
       - uses: cachix/install-nix-action@v17
 
       - id: update
-        run: ./update.py update ${{ matrix.package }}
+        run: ./update.py update ${{ matrix.package }} | tee $GITHUB_STEP_SUMMARY
 
       # Avoid creating a pull request if one already exists
       - name: Check for existing pull request
