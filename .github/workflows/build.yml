@@ -1,6 +1,6 @@
-name: Build
+name: Build and update flake.lock
 
-on: [push, repository_dispatch]
+on: [push, repository_dispatch, workflow_dispatch]
 
 jobs:
   matrix:

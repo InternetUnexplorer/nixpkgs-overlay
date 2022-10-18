@@ -1,4 +1,4 @@
-name: Check for updates
+name: Check for package updates
 
 on:
   schedule:
