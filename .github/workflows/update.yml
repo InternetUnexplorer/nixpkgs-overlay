@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: cachix/install-nix-action@v17
+      - uses: cachix/install-nix-action@v18
 
       - id: matrix
         run: ./update.py matrix | tee $GITHUB_STEP_SUMMARY
@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: cachix/install-nix-action@v17
+      - uses: cachix/install-nix-action@v18
 
       - id: update
         run: ./update.py update ${{ matrix.package }} | tee $GITHUB_STEP_SUMMARY
