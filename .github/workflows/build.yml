@@ -39,7 +39,7 @@ jobs:
         with:
           name: internetunexplorer
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          pushFilter: '^nixexprs\.tar\.xz$'
+          pushFilter: '-source$'
 
       - run: nix build .#${{ matrix.package }} --recreate-lock-file --print-build-logs
 
