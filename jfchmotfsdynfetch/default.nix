@@ -1,6 +1,6 @@
-{ stdenv, lib, fetchurl }:
+{ stdenvNoCC, lib, fetchurl }:
 
-stdenv.mkDerivation rec {
+stdenvNoCC.mkDerivation rec {
   name = "jfchmotfsdynfetch";
   progName = "jesusfuckingchristhowmanyofthesefetchscriptsdoyouneedfetch";
 
