@@ -17,6 +17,11 @@ stdenvNoCC.mkDerivation rec {
     runHook postInstall
   '';
 
+  postFixup = ''
+    # This can't be done in patchPhase since dontUnpack is set
+    sed -i '1i #!${stdenvNoCC.shell}' $out/bin/${progName}
+  '';
+
   passthru.exePath = "/bin/${progName}";
 
   meta = with lib; {
