@@ -1,8 +1,7 @@
 # Nixpkgs Overlay
 
-This is my personal Nixpkgs overlay with some packages I use. It's not intended
-to be used by anyone else, but I don't see any reason to not make it public in
-the unlikely chance that someone finds it useful.
+This is my personal Nixpkgs overlay with some packages I use. Feel free to use
+it, just keep in mind that packages might break or be removed over time!
 
 The packages here are regularly built against nixos-unstable and pushed to [my
 binary cache][1].
