@@ -9,7 +9,7 @@ stdenvNoCC.mkDerivation rec {
     repo = "Monocraft";
     rev = "v${version}";
     hash = "sha256-oKi7KK2JvUGoXuKei64PaLMz7NlzXcfXFLhZ1ScFI5k=";
-    sparseCheckout = "/";
+    sparseCheckout = [ "/" ];
   };
 
   installPhase = ''
