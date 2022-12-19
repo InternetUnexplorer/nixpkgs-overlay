@@ -2,13 +2,13 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "printrun";
-  version = "unstable-2022-09-11";
+  version = "unstable-2022-12-13";
 
   src = fetchFromGitHub {
     owner = "kliment";
     repo = "Printrun";
-    rev = "e60a93fd6c0216d57f5dc0a78118e89e9fda2d9a";
-    hash = "sha256-2cvlHC8ZI2KiqS6kWc+PAxeAwK1h6QxO0deBsDvW1Y0=";
+    rev = "8fd9b8b6dab86ee0c238016f9a0ed7b0c5abea73";
+    hash = "sha256-lZcGKfcBx9LVXkJ3diqdC9VnP2zHjJjCDw/NKMizJ2A=";
   };
 
   propagatedBuildInputs = with python3Packages; [
