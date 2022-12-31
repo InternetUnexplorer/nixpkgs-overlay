@@ -1,0 +1,39 @@
+diff --git a/qt/FileTreeDelegate.cc b/qt/FileTreeDelegate.cc
+index 999dcc6..ae1b469 100644
+--- a/qt/FileTreeDelegate.cc
++++ b/qt/FileTreeDelegate.cc
+@@ -49,7 +49,7 @@ void FileTreeDelegate::paint(QPainter* painter, QStyleOptionViewItem const& opti
+     if (column == FileTreeModel::COL_PROGRESS)
+     {
+         QStyleOptionProgressBar p;
+-        p.state = option.state | QStyle::State_Small;
++        p.state = option.state | QStyle::State_Horizontal | QStyle::State_Small;
+         p.direction = qApp->layoutDirection();
+         p.rect = option.rect;
+         p.rect.setSize(QSize(option.rect.width() - 4, option.rect.height() - 8));
+diff --git a/qt/TorrentDelegate.cc b/qt/TorrentDelegate.cc
+index 548813c..356b85f 100644
+--- a/qt/TorrentDelegate.cc
++++ b/qt/TorrentDelegate.cc
+@@ -545,7 +545,7 @@ void TorrentDelegate::drawTorrent(QPainter* painter, QStyleOptionViewItem const&
+         progressBarState = QStyle::State_None;
+     }
+ 
+-    progressBarState |= QStyle::State_Small;
++    progressBarState |= QStyle::State_Horizontal | QStyle::State_Small;
+ 
+     QIcon::Mode const emblemIm = isItemSelected ? QIcon::Selected : QIcon::Normal;
+     QIcon const emblemIcon = tor.hasError() ? getWarningEmblem() : QIcon();
+diff --git a/qt/TorrentDelegateMin.cc b/qt/TorrentDelegateMin.cc
+index 2f9bdef..4d82c28 100644
+--- a/qt/TorrentDelegateMin.cc
++++ b/qt/TorrentDelegateMin.cc
+@@ -218,7 +218,7 @@ void TorrentDelegateMin::drawTorrent(QPainter* painter, QStyleOptionViewItem con
+         progressBarState = QStyle::State_None;
+     }
+ 
+-    progressBarState |= QStyle::State_Small;
++    progressBarState |= QStyle::State_Horizontal | QStyle::State_Small;
+ 
+     QIcon::Mode const emblemIm = isItemSelected ? QIcon::Selected : QIcon::Normal;
+     QIcon const emblemIcon = tor.hasError() ? getWarningEmblem() : QIcon();
