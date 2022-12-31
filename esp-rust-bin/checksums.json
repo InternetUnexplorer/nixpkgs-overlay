@@ -1,6 +1,0 @@
-{
-  "aarch64-apple-darwin": "sha256-nJMLowwf7Mz9o/+fDa+xA6c6L3wexu/MsLKPnI/OhBE=",
-  "aarch64-unknown-linux-gnu": "sha256-yEMoTcP4uXDINlzMVlqUvJmQP8tH/2IfvYkAUWhpAjc=",
-  "x86_64-apple-darwin": "sha256-MJOw+Si9AJwolfVVFHC6i42JIti4h2vskxuo2kYi9RM=",
-  "x86_64-unknown-linux-gnu": "sha256-jgSVwYYcQB8SAJR1j/Qhzmn8fcqumZT615qTSfHifVE="
-}
