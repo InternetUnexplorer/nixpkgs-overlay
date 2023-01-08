@@ -13,9 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: cachix/install-nix-action@v18
+      - uses: ./.github/actions/set-up-nix-and-cachix
         with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          cachix_token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - id: matrix
         run: ./build_matrix.py | tee $GITHUB_STEP_SUMMARY
@@ -35,15 +36,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: cachix/install-nix-action@v18
+      - uses: ./.github/actions/set-up-nix-and-cachix
         with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: cachix/cachix-action@v12
-        with:
-          name: internetunexplorer
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          pushFilter: '-source$'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          cachix_token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - run: nix build .#${{ matrix.package }} --recreate-lock-file --print-build-logs
 
@@ -61,14 +57,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: cachix/install-nix-action@v18
+      - uses: ./.github/actions/set-up-nix-and-cachix
         with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          cachix_token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-
       - run: nix flake update --commit-lock-file
-
       - run: git push
