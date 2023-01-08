@@ -10,7 +10,6 @@ binary cache][1].
 
 The following files were copied from Nixpkgs and are subject to the [Nixpkgs license][2]:
 
-- [blender_2_93/blender_2_93.nix](./blender_2_93/blender_2_93.nix)
 - [ksysguard/ksysguard.nix](./ksysguard/ksysguard.nix)
 - [squeak_4_10/squeak_4_10.nix](./squeak_4_10/squeak_4_10.nix)
 
