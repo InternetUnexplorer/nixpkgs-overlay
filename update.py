@@ -151,7 +151,7 @@ def update_package_generic(
     current version."""
     current_version = get_package_attr(pname, "version")
     if current_version == version:
-        print(f"package {pname} is already the latest version ({version})")
+        print(f"{pname} is already the latest version ({version})")
         return
 
     def print_change(name: str, old: str, new: str) -> None:
@@ -228,19 +228,17 @@ def update_package_github_releases(pname: str) -> None:
 def get_supported_packages():
     """Output the names of packages that support auto-updates."""
     supported = []
-    print("```text")
-    print("———— Packages supporting auto-updates ——————————————————————")
+    print("**These packages support automated updates:**")
     for pname, method in get_update_methods().items():
         if not method:
             continue
         package_file = get_package_file(pname)
         if not package_file:
             continue
-        print(f"- {pname} ({package_file}, method {method})")
+        print(f"- **{pname}** ({package_file}, method {method})")
         supported.append(pname)
     if not supported:
         print("  (none)")
-    print("```")
     set_output("packages", supported)
 
 
