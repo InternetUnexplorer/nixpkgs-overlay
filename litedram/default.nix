@@ -2,13 +2,13 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "litedram";
-  version = "2022.08";
+  version = "2022.12";
 
   src = fetchFromGitHub {
     owner = "enjoy-digital";
     repo = "litedram";
     rev = version;
-    hash = "sha256-ihwEvVWlPqIIfPrnmoQsGU/utHo3QA68J85rS+tSMLE=";
+    hash = "sha256-LeRUpLqHtNEVgQ1zgOwfXdyXJpLnfbhWEpOF/gUW744=";
   };
 
   propagatedBuildInputs = with python3Packages; [
