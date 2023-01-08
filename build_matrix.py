@@ -4,7 +4,7 @@ import json
 from dataclasses import dataclass
 from os import environ
 from subprocess import DEVNULL, check_output, run
-from typing import Callable, Dict, List
+from typing import Set, List
 
 BINARY_CACHE_URLS = [
     "https://internetunexplorer.cachix.org",
@@ -12,8 +12,9 @@ BINARY_CACHE_URLS = [
 ]
 
 
-@dataclass
+@dataclass(frozen=True)
 class Package:
+    name: str
     path: str
     broken: bool
 
@@ -24,11 +25,8 @@ class Package:
     def is_in_any_cache(self) -> bool:
         return any(self.is_in_cache(cache) for cache in BINARY_CACHE_URLS)
 
-    def should_be_built(self) -> bool:
-        return not self.broken and not self.is_in_any_cache()
 
-
-def get_packages() -> Dict[str, Package]:
+def get_all_packages() -> Set[Package]:
     output = check_output(
         [
             "nix",
@@ -48,34 +46,27 @@ def get_packages() -> Dict[str, Package]:
         env=dict(environ, NIXPKGS_ALLOW_BROKEN="1"),
     )
 
-    return {name: Package(**fields) for name, fields in json.loads(output).items()}
+    return {Package(name, **attrs) for name, attrs in json.loads(output).items()}
 
 
-def filter_packages(
-    predicate: Callable[[Package], bool], packages: Dict[str, Package]
-) -> Dict[str, Package]:
-    return {name: package for name, package in packages.items() if predicate(package)}
-
-
-def print_packages(title: str, packages: List[Package]) -> None:
-    print(f"———— {title} ".ljust(60, "—"))
-    for package in packages or [None]:
-        print(f"- {package.path if package else '(none)'}")
+def print_packages(title: str, packages: Set[Package]) -> None:
+    print(f"**{title}:**")
+    for package in sorted(list(packages), key=lambda p: p.name) or [None]:
+        print(f"- {package.path.removeprefix('/nix/store/') if package else '(none)'}")
+    print()
 
 
 if __name__ == "__main__":
-    packages = get_packages()
-    broken_packages = filter_packages(lambda package: package.broken, packages)
-    packages_to_build = filter_packages(Package.should_be_built, packages)
+    all_packages = get_all_packages()
+    broken_packages = {p for p in all_packages if p.broken}
+    built_packages = {p for p in all_packages - broken_packages if p.is_in_any_cache()}
+    packages_to_build = all_packages - broken_packages - built_packages
 
-    print("```text")
-    print_packages("Packages in flake", list(packages.values()))
-    print()
-    print_packages("Packages marked as broken", list(broken_packages.values()))
-    print()
-    print_packages("Packages to be built", list(packages_to_build.values()))
-    print("```")
+    print_packages("These packages will be built", packages_to_build)
+    print_packages("These packages are marked as broken", broken_packages)
+    print_packages("These packages have already been built", built_packages)
 
     if "GITHUB_OUTPUT" in environ:
         with open(environ["GITHUB_OUTPUT"], "a") as file:
-            print(f"packages={json.dumps(list(packages_to_build.keys()))}", file=file)
+            packages = [package.name for package in packages_to_build]
+            print(f"packages={json.dumps(packages)}", file=file)
