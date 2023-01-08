@@ -16,7 +16,6 @@ jobs:
       - uses: ./.github/actions/set-up-nix-and-cachix
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          cachix_token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - id: matrix
         run: ./build_matrix.py | tee $GITHUB_STEP_SUMMARY
@@ -60,7 +59,6 @@ jobs:
       - uses: ./.github/actions/set-up-nix-and-cachix
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          cachix_token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
