@@ -52,7 +52,7 @@ def get_all_packages() -> Set[Package]:
 def print_packages(title: str, packages: Set[Package]) -> None:
     print(f"**{title}:**")
     for package in sorted(list(packages), key=lambda p: p.name) or [None]:
-        print(f"- {package.path.removeprefix('/nix/store/') if package else '(none)'}")
+        print(f"- {package.path if package else '(none)'}")
     print()
 
 
