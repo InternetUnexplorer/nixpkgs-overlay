@@ -2,7 +2,7 @@ name: Check for package updates
 
 on:
   schedule:
-    - cron: 0 14 * * 0 # Every Sunday at 2PM
+    - cron: 0 14 * * * # Every day at 2PM
   workflow_dispatch:
 
 concurrency: update
