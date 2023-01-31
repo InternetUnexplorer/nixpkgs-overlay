@@ -52,6 +52,5 @@ python3Packages.buildPythonApplication rec {
     inherit (src.meta) homepage;
     license = licenses.gpl3Plus;
     platforms = platforms.linux; # TODO
-    broken = true;
   };
 }
