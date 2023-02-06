@@ -12,7 +12,7 @@ runs:
   using: composite
 
   steps:
-    - uses: cachix/install-nix-action@b95f68250363e6996e0fdafe18cf23c3fc9f873b
+    - uses: cachix/install-nix-action@v19
       with:
         github_access_token: ${{ inputs.github_token }}
 
