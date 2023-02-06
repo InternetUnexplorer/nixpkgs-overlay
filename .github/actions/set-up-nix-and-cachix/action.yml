@@ -2,9 +2,6 @@ name: Set up Nix and Cachix
 description: Install and configure Nix and Cachix
 
 inputs:
-  github_token:
-    description: GitHub token for API requests
-    required: true
   cachix_token:
     description: Cachix token for pushing paths
 
@@ -13,8 +10,6 @@ runs:
 
   steps:
     - uses: cachix/install-nix-action@v19
-      with:
-        github_access_token: ${{ inputs.github_token }}
 
     - uses: cachix/cachix-action@v12
       if: ${{ inputs.cachix_token != '' }}
