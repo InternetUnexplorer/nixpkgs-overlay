@@ -2,13 +2,13 @@
 
 stdenvNoCC.mkDerivation rec {
   pname = "monocraft";
-  version = "1.4";
+  version = "2.4";
 
   src = fetchFromGitHub {
     owner = "IdreesInc";
     repo = "Monocraft";
     rev = "v${version}";
-    hash = "sha256-oKi7KK2JvUGoXuKei64PaLMz7NlzXcfXFLhZ1ScFI5k=";
+    hash = "sha256-Ya4sizRy9nXMVBCNs4Zi83yXa855hwBXICppJesnhwA=";
     sparseCheckout = [ "/" ];
   };
 
