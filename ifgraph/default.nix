@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "ifgraph";
-  version = "unstable-2023-01-29";
+  version = "unstable-2023-02-15";
 
   src = fetchFromGitHub {
     owner = "stolk";
     repo = "ifgraph";
-    rev = "e4d69ee482200f3f3e382ec3f2645a666b1856a4";
-    hash = "sha256-v49TetJwkVv+XzCGJ+1A7ADszT/SQj9CRNq7iX3mCrk=";
+    rev = "d55df7bcb5fd37eb81bfa40df44356f7b3784864";
+    hash = "sha256-61a82kXtX1ccLx53LIwDmneqO2usQdhgLQkRkRmOprI=";
   };
 
   postPatch = ''
