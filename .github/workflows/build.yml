@@ -4,7 +4,6 @@ on: [push, repository_dispatch, workflow_dispatch]
 
 concurrency:
   group: ${{ github.workflow }}
-  cancel-in-progress: true
 
 defaults:
   run:
