@@ -10,11 +10,5 @@ abc-verifier.overrideAttrs (final: prev: {
     hash = "sha256-48i6AKQhMG5hcnkS0vejOy1PqFbeb6FpU7Yx0rEvHDI=";
   };
 
-  passthru = prev.passthru // {
-    inherit (final.src) rev;
-    autoUpdate = "git-commits";
-  };
-
-  pos.file = ./default.nix; # TODO: this seems like a hack :(
-  pos.line = 1;
+  passthru = prev.passthru // { inherit (final.src) rev; };
 })
