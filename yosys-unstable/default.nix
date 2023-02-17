@@ -1,6 +1,6 @@
 { yosys, callPackage, fetchFromGitHub }:
 
-let abc-verifier = callPackage ../abc-verifier { };
+let abc-verifier = callPackage ./abc-verifier.nix { };
 
 in (yosys.override { inherit abc-verifier; }).overrideAttrs (final: prev: {
   version = "unstable-2023-02-17";
