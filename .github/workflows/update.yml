@@ -5,7 +5,8 @@ on:
     - cron: 0 14 * * * # Every day at 2PM
   workflow_dispatch:
 
-concurrency: update
+concurrency:
+  group: ${{ github.workflow }}
 
 defaults:
   run:
