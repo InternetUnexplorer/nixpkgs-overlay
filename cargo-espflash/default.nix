@@ -1,13 +1,13 @@
 { cargo-espflash, fetchFromGitHub, openssl, udev }:
 
 cargo-espflash.overrideAttrs (old: rec {
-  version = "2.0.0-rc.2";
+  version = "2.0.0-rc.3";
 
   src = fetchFromGitHub {
     owner = "esp-rs";
     repo = "espflash";
     rev = "v${version}";
-    hash = "sha256-g20dhsWWf5T2Hcr9HEkezwwx1Q/ZQkN0ch/zEH6MeII=";
+    hash = "sha256-6rWv/a+tg0dn5BEZ2JCEqAIFBufuDxImfdIuqrfS0VA=";
   };
 
   buildInputs = [ openssl udev ];
@@ -21,6 +21,6 @@ cargo-espflash.overrideAttrs (old: rec {
 
   cargoDeps = old.cargoDeps.overrideAttrs (_: {
     inherit src;
-    outputHash = "sha256-Mh3ryJV8ae53PKRHTC3EVd15ZjGDVvbQKSzgXEVDGOc=";
+    outputHash = "sha256-mp9Qafk3eV5tF9cZ53F58t17cWoHZMRK6krvSGrOgV8=";
   });
 })
