@@ -1,6 +1,6 @@
-{ nextpnr, callPackage, fetchFromGitHub }:
+{ nextpnrWithGui, callPackage, fetchFromGitHub }:
 
-nextpnr.overrideAttrs (final: prev: {
+nextpnrWithGui.overrideAttrs (final: prev: {
   version = "unstable-2023-02-23";
 
   src = fetchFromGitHub {
