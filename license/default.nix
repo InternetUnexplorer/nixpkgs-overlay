@@ -50,5 +50,6 @@ rustPlatform.buildRustPackage rec {
     inherit (src.meta) homepage;
     license = licenses.mpl20;
     platforms = platforms.unix;
+    broken = true; # FIXME: sourcehut gives 401 Unauthorized???
   };
 }
