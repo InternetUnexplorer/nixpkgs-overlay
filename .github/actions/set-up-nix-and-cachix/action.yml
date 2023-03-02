@@ -9,7 +9,7 @@ runs:
   using: composite
 
   steps:
-    - uses: cachix/install-nix-action@v19
+    - uses: cachix/install-nix-action@v20
 
     - uses: cachix/cachix-action@v12
       if: ${{ inputs.cachix_token != '' }}
