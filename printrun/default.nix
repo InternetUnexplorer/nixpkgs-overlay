@@ -23,7 +23,7 @@ python3Packages.buildPythonApplication rec {
     pyserial
     dbus-python
     six
-    wxPython_4_1
+    wxPython_4_2
   ];
 
   patchPhase = ''
