@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "breeze-enhanced";
-  version = "unstable-2023-03-14";
+  version = "unstable-2023-03-23";
 
   src = fetchFromGitHub {
     owner = "tsujan";
     repo = "BreezeEnhanced";
-    rev = "a1cd1d6bfea3f59ecbcb004147917a2b01b409cb";
-    hash = "sha256-V5lNRJuJUPzQvjGGJQH8Q/xqGbHmFApfbkYOsc8z4nI=";
+    rev = "add552ed277d4a9a1565c9e7f2f382300042e0c4";
+    hash = "sha256-GpliOf9VBx79xT3zcOISXNuqsY6/T9Q+C7C8+i9sTlM=";
   };
 
   nativeBuildInputs = [ extra-cmake-modules plasma5Packages.wrapQtAppsHook ];
