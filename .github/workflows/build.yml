@@ -55,7 +55,7 @@ jobs:
     if: |
       always()
       && (needs.build.result == 'success' || needs.build.result == 'skipped')
-      && github.ref == 'refs/heads/main' # do not update flake.lock for PRs
+      && github.ref == 'refs/heads/main'
 
     steps:
       - uses: actions/checkout@v3
@@ -66,4 +66,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
       - run: nix flake update --commit-lock-file
-      - run: git push
+      # This might fail because main has been pushed to since the workflow
+      # started, these runs will trigger another workflow run so it should be
+      # fine to ignore errors...?
+      - run: git push || true
