@@ -58,7 +58,7 @@ jobs:
         run: echo "rev=$(git ls-remote origin ${{ fromJson(steps.update.outputs.pr-branch) }})" >> $GITHUB_OUTPUT
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         if: steps.update.outputs.pr-title != '' && steps.check-existing.outputs.rev == ''
         with:
           token: ${{ secrets.REPO_TOKEN }}
