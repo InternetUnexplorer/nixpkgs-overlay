@@ -12,6 +12,7 @@ The following files were copied from Nixpkgs and are subject to the [Nixpkgs lic
 
 - [ksysguard/ksysguard.nix](./ksysguard/ksysguard.nix)
 - [squeak_4_10/squeak_4_10.nix](./squeak_4_10/squeak_4_10.nix)
+- [yosys-unstable/plugin-search-dirs.patch](./yosys-unstable/plugin-search-dirs.patch)
 
 All other files are licensed under [CC0][3].
 
