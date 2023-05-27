@@ -16,6 +16,8 @@ in (yosys.override { inherit abc-verifier; }).overrideAttrs (final: prev: {
     sed 's/YOSYS_VER := .*/YOSYS_VER := ${final.version}/g' -i Makefile
   '';
 
+  patches = [ ./plugin-search-dirs.patch ];
+
   passthru = prev.passthru // { autoUpdate = "git-commits"; };
 
   pos.file = ./default.nix; # TODO: this seems like a hack :(
