@@ -3,7 +3,7 @@ name: Build and update flake.lock
 on: [push, repository_dispatch, workflow_dispatch]
 
 concurrency:
-  group: '${{ github.workflow }}/${{ github.branch }}'
+  group: ${{ github.workflow }}-${{ github.branch }}
 
 defaults:
   run:
