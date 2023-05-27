@@ -58,6 +58,7 @@ jobs:
         run: echo "rev=$(git ls-remote origin ${{ fromJson(steps.update.outputs.pr-branch) }})" >> $GITHUB_OUTPUT
 
       - name: Create pull request
+        id: create-pull-request
         uses: peter-evans/create-pull-request@v5
         if: steps.update.outputs.pr-title != '' && steps.check-existing.outputs.rev == ''
         with:
@@ -71,3 +72,9 @@ jobs:
             ${{ fromJson(steps.update.outputs.pr-title) }}
 
             ${{ fromJson(steps.update.outputs.pr-body) }}
+
+      - name: Enable pull request auto-merge
+        if: steps.create-pull-request.outputs.pull-request-number != ''
+        run: gh pr merge --merge --auto ${{ steps.create-pull-request.outputs.pull-request-number }}
+        env:
+          GH_TOKEN: ${{ secrets.REPO_TOKEN }}
