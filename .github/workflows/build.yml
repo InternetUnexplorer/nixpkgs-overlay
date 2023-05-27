@@ -2,8 +2,10 @@ name: Build and update flake.lock
 
 on: [push, repository_dispatch, workflow_dispatch]
 
+# This should (hopefully) only allow one run at a time per branch
+# In-progress builds are not cancelled to let long-running builds finish
 concurrency:
-  group: ${{ github.workflow }}-${{ github.branch }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
 
 defaults:
   run:
