@@ -173,9 +173,8 @@ def update_package_generic(
     print_change("src.hash", current_hash, new_hash)
     set_package_attr(pname, "src.outputHash", current_hash, new_hash)
 
-    set_output("pr-branch", f"{pname}-{version}")
-    set_output("pr-title", f"{pname}: {current_version} -> {version}")
-    set_output("pr-body", f"Automated update by update.py (method: {method}).")
+    commit_message = f"{pname}: {current_version} -> {version}"
+    get_stdout(["git", "commit", "--all", "--message", commit_message])
 
 
 ################################################

@@ -16,7 +16,7 @@ defaults:
 jobs:
   # Query which packages are in the flake and not in any binary cache.
   generate-matrix:
-    name: Generate build matrix
+    name: Generate matrix
     runs-on: ubuntu-latest
 
     outputs:
@@ -29,7 +29,7 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v3
 
-      - name: Generate build matrix
+      - name: Generate matrix
         id: matrix
         run: ./matrix.py | tee $GITHUB_STEP_SUMMARY
 
@@ -46,7 +46,7 @@ jobs:
     strategy:
       matrix:
         package: ${{ fromJson(needs.matrix.outputs.packages) }}
-      fail-fast: false
+      fail-fast: false # Keep going if some jobs fail.
 
     steps:
       - name: Set up repository
@@ -70,7 +70,7 @@ jobs:
   # matrix, so we need an extra job to report the status.
   # https://github.com/orgs/community/discussions/26822
   check-status:
-    name: Wait for build(s) to succeed
+    name: Wait for jobs to succeed
     runs-on: ubuntu-latest
     needs: build
 

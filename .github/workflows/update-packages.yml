@@ -1,7 +1,10 @@
-name: Update flake.lock
+name: Update packages
 
-# Triggered by nix-channel-watcher, but can also be triggered manually.
-on: [repository_dispatch, workflow_dispatch]
+# Run periodically, but can also be triggered manually.
+on:
+  schedule:
+    - cron: 0 14 * * 0 # Every Sunday at 2PM.
+  workflow_dispatch:
 
 # Only allow one run at a time.
 concurrency:
@@ -14,8 +17,8 @@ defaults:
     shell: bash
 
 jobs:
-  update-flake:
-    name: Update flake.lock
+  generate-matrix:
+    name: Generate matrix
     runs-on: ubuntu-latest
 
     # This workflow should only run on the main branch; running on other
@@ -23,9 +26,33 @@ jobs:
     # consequences, so restricting it seems like the safest choice for now.
     if: github.ref == 'refs/heads/main'
 
-    permissions:
-      pull-requests: write # Write access is needed to create a pull request.
-      contents: write # Write access is needed to enable auto-merge.
+    outputs:
+      packages: ${{ steps.matrix.outputs.packages }}
+
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v3
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Generate matrix
+        id: matrix
+        run: ./update.py matrix | tee $GITHUB_STEP_SUMMARY
+
+  # Update the packages in parallel using a matrix strategy.
+  update:
+    name: ${{ matrix.package }}
+    runs-on: ubuntu-latest
+    needs: generate-matrix
+
+    # Skip this entire job if there are no packages to update.
+    if: needs.generate-matrix.outputs.packages != '[]'
+
+    strategy:
+      matrix:
+        package: ${{ fromJson(needs.matrix.outputs.packages) }}
+      fail-fast: false # Keep going if some jobs fail.
 
     steps:
       - name: Set up repository
@@ -51,10 +78,11 @@ jobs:
       # the checks for a previous pull request failed or are still running, so
       # failing seems like the safest thing to do.
       - name: Create branch for pull request
-        run: git checkout -b auto-update/flake-inputs
+        run: git checkout -b auto-update/${{ matrix.package }}
 
-      - name: Update flake.lock
-        run: nix flake update --commit-lock-file
+      - name: Update ${{ matrix.package }}
+        id: update
+        run: ./update.py update ${{ matrix.package }} | tee $GITHUB_STEP_SUMMARY
 
       - name: Create pull request
         run: |
@@ -62,21 +90,18 @@ jobs:
           [[ $(git diff ${{ github.ref_name }}) ]] || exit 0
 
           # Push the changes.
-          git push -u origin auto-update/flake-inputs
+          git push -u origin auto-update/${{ matrix.package }}
 
           # Generate the pull request body.
           PR_BODY=$(mktemp)
           echo 'This pull request was created automatically by GitHub Actions :)' >> $PR_BODY
           echo '<sub>**${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}**</sub>' >> $PR_BODY
-          echo '```' >> $PR_BODY
-          git show --no-patch --format=format:%b >> $PR_BODY
-          echo '```' >> $PR_BODY
 
           # Create the pull request and enable auto-merge.
           gh pr merge --auto --rebase --delete-branch $(gh pr create \
-            --title "Update flake.lock"                              \
+            --title $(git show --no-patch --format=format:%s)        \
             --body-file $PR_BODY                                     \
-            --label "automated" --label "flake.lock update"          \
+            --label "automated" --label "package update"             \
           )
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
