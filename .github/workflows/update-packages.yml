@@ -99,7 +99,7 @@ jobs:
 
           # Create the pull request and enable auto-merge.
           gh pr merge --auto --rebase --delete-branch $(gh pr create \
-            --title $(git show --no-patch --format=format:%s)        \
+            --title "$(git show --no-patch --format=format:%s)"      \
             --body-file $PR_BODY                                     \
             --label "automated" --label "package update"             \
           )
