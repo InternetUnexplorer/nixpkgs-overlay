@@ -32,7 +32,6 @@ def get_all_packages() -> Set[Package]:
             "nix",
             "eval",
             "--impure",
-            "--recreate-lock-file",
             "--json",
             ".#packages.x86_64-linux",
             "--apply",
