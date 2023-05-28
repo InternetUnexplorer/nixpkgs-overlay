@@ -1,0 +1,82 @@
+name: Update flake.lock
+
+# Triggered by nix-channel-watcher, but can also be triggered manually.
+on: [repository_dispatch, workflow_dispatch]
+
+# Only allow one run at a time.
+concurrency:
+  group: ${{ github.workflow }}
+
+# Specify bash to enable `-eo pipefail`.
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  update-flake:
+    name: Update flake.lock
+    runs-on: ubuntu-latest
+
+    # This should only run on the main branch; running on other branches could
+    # be useful in some situations, but it might have unexpected consequences,
+    # so restricting it seems like the safest choice for now.
+    if: github.ref == 'refs/heads/main'
+
+    permissions:
+      pull-requests: write # Write access is needed to create a pull request.
+      contents: write # Write access is needed to enable auto-merge.
+
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v3
+        with:
+          # Specifying the deploy key here sets it up to be used for pushing
+          # later; this is a workaround for GITHUB_TOKEN being unable to trigger
+          # workflows on push/pull request/etc.
+          # https://github.com/orgs/community/discussions/25702
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
+
+      # Commits will be authored by the GitHub Actions bot user.
+      - name: Set up commit author
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      # This will fail if the branch already exists; since pull requests created
+      # by this workflow should be auto-merged, an existing branch either means
+      # the checks for a previous pull request failed or are still running, so
+      # failing seems like the safest thing to do.
+      - name: Create branch for pull request
+        run: git checkout -b auto-update/flake-inputs
+
+      - name: Update flake.lock
+        run: nix flake update --commit-lock-file
+
+      - name: Create pull request
+        run: |
+          # There might not be a commit if everything is already up-to-date.
+          [[ $(git diff ${{ github.ref_name }}) ]] || exit 0
+
+          # Push the changes.
+          git push -u origin auto-update/flake-inputs
+
+          # Generate the pull request body.
+          PR_BODY=$(mktemp)
+          echo 'This pull request was created automatically by GitHub Actions :)' >> $PR_BODY
+          echo '<sub>**${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}**</sub>' >> $PR_BODY
+          echo '```' >> $PR_BODY
+          git show --no-patch --format=format:%b >> $PR_BODY
+          echo '```' >> $PR_BODY
+
+          # Create the pull request and enable auto-merge.
+          gh pr merge --auto --rebase --delete-branch $(gh pr create \
+            --title "Update flake.lock"                              \
+            --body-file $PR_BODY                                     \
+            --label "automation" --label "flake.lock update"         \
+          )
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

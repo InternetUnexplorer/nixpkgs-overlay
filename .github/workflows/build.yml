@@ -1,18 +1,21 @@
-name: Build and update flake.lock
+name: Build packages
 
-on: [push, repository_dispatch, workflow_dispatch]
+# Triggered by pushes to any branch, but can also be triggered manually.
+on: [push, workflow_dispatch]
 
-# This should (hopefully) only allow one run at a time per branch
-# In-progress builds are not cancelled to let long-running builds finish
+# Only allow one run at a time per branch.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  group: ${{ github.workflow }}-${{ github.ref_name }}
 
+# Specify bash to enable `-eo pipefail`.
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
 defaults:
   run:
-    shell: bash # Enables `-eo pipefail`
+    shell: bash
 
 jobs:
-  matrix:
+  # Query which packages are in the flake and not in any binary cache.
+  generate-matrix:
     name: Generate build matrix
     runs-on: ubuntu-latest
 
@@ -20,19 +23,25 @@ jobs:
       packages: ${{ steps.matrix.outputs.packages }}
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Set up repository
+        uses: actions/checkout@v3
 
-      - uses: ./.github/actions/set-up-nix-and-cachix
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
 
-      - id: matrix
-        run: ./build_matrix.py | tee $GITHUB_STEP_SUMMARY
+      - name: Generate build matrix
+        id: matrix
+        run: ./matrix.py | tee $GITHUB_STEP_SUMMARY
 
+
+  # Build the packages in parallel using a matrix strategy.
   build:
     name: ${{ matrix.package }}
     runs-on: ubuntu-latest
-    needs: matrix
+    needs: generate-matrix
 
-    if: needs.matrix.outputs.packages != '[]'
+    # Skip this entire job if there are no packages to build.
+    if: needs.generate-matrix.outputs.packages != '[]'
 
     strategy:
       matrix:
@@ -40,45 +49,33 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Set up repository
+        uses: actions/checkout@v3
 
-      - uses: ./.github/actions/set-up-nix-and-cachix
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      # cachix-action will take care of pushing everything to the binary cache.
+      - name: Set up binary cache
+        uses: cachix/cachix-action@v12
         with:
-          cachix_token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: internetunexplorer
+          authToken: ${{ secrets.CACHIX_TOKEN }}
+          pushFilter: "-source$" # Skip pushing sources to save space.
 
-      - run: nix build .#${{ matrix.package }} --recreate-lock-file --print-build-logs
+      - name: Build ${{ matrix.package }}
+        run: nix build .#${{ matrix.package }} --print-build-logs
 
-  update-flake-lock:
-    name: Update flake.lock
+  # Branch protection rules cannot require the success of all of the jobs in a
+  # matrix, so we need an extra job to report the status.
+  # https://github.com/orgs/community/discussions/26822
+  check-status:
+    name: Wait for build(s) to succeed
     runs-on: ubuntu-latest
     needs: build
 
-    # See: https://github.com/actions/runner/issues/491
-    if: |
-      always()
-      && (needs.build.result == 'success' || needs.build.result == 'skipped')
-      && github.ref == 'refs/heads/main'
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: ./.github/actions/set-up-nix-and-cachix
-
-      - run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-      - run: nix flake update --commit-lock-file
-      # This might fail because main has been pushed to since the workflow
-      # started, these runs will trigger another workflow run so it should be
-      # fine to ignore errors...?
-      - run: git push || true
-
-  # See: https://github.com/orgs/community/discussions/26822
-  check-failed:
-    name: Check for failed builds
-    runs-on: ubuntu-latest
-    needs: build
-
+    # Always run this job, even when no packages were built.
+    # https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions
     if: always()
 
     steps:
