@@ -51,7 +51,7 @@ jobs:
 
     strategy:
       matrix:
-        package: ${{ fromJson(needs.matrix.outputs.packages) }}
+        package: ${{ fromJson(needs.generate-matrix.outputs.packages) }}
       fail-fast: false # Keep going if some jobs fail.
 
     steps:
