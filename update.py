@@ -173,7 +173,9 @@ def update_package_generic(
     print_change("src.hash", current_hash, new_hash)
     set_package_attr(pname, "src.outputHash", current_hash, new_hash)
 
-    commit_message = f"{pname}: {current_version} -> {version}"
+    commit_title = f"{pname}: {current_version} -> {version}"
+    commit_body = f"Automated update by update.py (method: {method})."
+    commit_message = f"{commit_title}\n\n{commit_body}"
     get_stdout(["git", "commit", "--all", "--message", commit_message])
 
 
