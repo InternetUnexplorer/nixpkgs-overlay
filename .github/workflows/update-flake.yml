@@ -18,14 +18,14 @@ jobs:
     name: Update flake.lock
     runs-on: ubuntu-latest
 
+    permissions:
+      pull-requests: write # Write access is needed to create a pull request.
+      contents: write # Write access is needed to enable auto-merge.
+
     # This workflow should only run on the main branch; running on other
     # branches could be useful in some situations, but it might have unexpected
     # consequences, so restricting it seems like the safest choice for now.
     if: github.ref == 'refs/heads/main'
-
-    permissions:
-      pull-requests: write # Write access is needed to create a pull request.
-      contents: write # Write access is needed to enable auto-merge.
 
     steps:
       - name: Set up repository
