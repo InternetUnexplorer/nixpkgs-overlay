@@ -76,7 +76,7 @@ jobs:
           gh pr merge --auto --rebase --delete-branch $(gh pr create \
             --title "Update flake.lock"                              \
             --body-file $PR_BODY                                     \
-            --label "automation" --label "flake.lock update"         \
+            --label "automated" --label "flake.lock update"          \
           )
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
