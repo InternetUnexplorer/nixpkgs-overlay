@@ -1,13 +1,13 @@
 { nextpnrWithGui, callPackage, fetchFromGitHub }:
 
 nextpnrWithGui.overrideAttrs (final: prev: {
-  version = "unstable-2023-05-29";
+  version = "unstable-2023-06-09";
 
   src = fetchFromGitHub {
     owner = "YosysHQ";
     repo = "nextpnr";
-    rev = "119b47acf3be0c7bd5b75f736ac07fdc81f74c2a";
-    hash = "sha256-3h/BKEnarho4H41CVndSVEgRX5WnysMbTZjzc5oxTrM=";
+    rev = "5b958c4d80e791d924c80bca48a1c41a8037e1d8";
+    hash = "sha256-bH27t8JUFcH4gcEu/sPt9CNYeWJO0mDgOhM6qq5CXtU=";
   };
 
   passthru = (prev.passthru or { }) // { autoUpdate = "git-commits"; };
