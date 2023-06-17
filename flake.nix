@@ -1,10 +1,7 @@
 {
-  description = "InternetUnexplorer's nixpkgs overlays";
+  description = "A small overlay with some packages I use";
 
-  inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  };
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   nixConfig = {
     extra-substituters = "https://internetunexplorer.cachix.org";
@@ -12,27 +9,34 @@
       "internetunexplorer.cachix.org-1:F6CYMkx5/TJmDQQ+DTsFzRy58Ad+doYEW5CdVDZJVdY=";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [ self.overlays.default ];
-        };
+  outputs = { self, nixpkgs }:
+    let
+      allSystems = nixpkgs.lib.systems.flakeExposed;
+      forAllSystems = gen: nixpkgs.lib.genAttrs allSystems gen;
+    in {
+      packages = forAllSystems (system:
+        let
+          allPackages = import ./all-packages.nix {
+            inherit (nixpkgs.legacyPackages.${system}) lib callPackage;
+          };
+          isSupported = _: package:
+            nixpkgs.lib.elem system package.meta.platforms;
+        in nixpkgs.lib.filterAttrs isSupported allPackages);
 
-        isSupported = _: drv: builtins.elem system drv.meta.platforms;
-        packages = pkgs.lib.filterAttrs isSupported
-          (pkgs.lib.genAttrs (import ./packages.nix { inherit (pkgs) lib; })
-            (name: pkgs.${name}));
+      apps = forAllSystems (system:
+        let
+          isApp = _: package:
+            nixpkgs.lib.hasAttrByPath [ "passthru" "exePath" ] package;
+          mkApp = _: package: {
+            type = "app";
+            program = "${package}${package.passthru.exePath}";
+          };
+        in nixpkgs.lib.mapAttrs mkApp
+        (nixpkgs.lib.filterAttrs isApp self.packages.${system}));
 
-        isApp = _: drv: pkgs.lib.hasAttrByPath [ "passthru" "exePath" ] drv;
-        apps =
-          pkgs.lib.mapAttrs (_: drv: flake-utils.lib.mkApp { inherit drv; })
-          (pkgs.lib.filterAttrs isApp packages);
-
-      in { inherit apps packages; }
-
-    ) // {
       overlays.default = import ./default.nix;
+
+      formatter =
+        forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
     };
 }
