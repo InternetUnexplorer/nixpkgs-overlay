@@ -7,7 +7,7 @@
 
 stdenv.mkDerivation rec {
   pname = "vkcube";
-  version = "unstable-2022-11-08";
+  version = "unstable-2022-11-09";
 
   src = fetchFromGitHub {
     owner = "krh";
