@@ -129,7 +129,7 @@ def update_package(name: str) -> None:
     """Update the specified package and commit the changes, if any."""
     version_pre = nix_eval_json(f".#{name}.version")
     nix("build", f".#{name}.passthru.updateScript")
-    run("./result")
+    run("./result", check=True)
     version_post = nix_eval_json(f".#{name}.version")
     if version_pre != version_post:
         commit_message = f"{name}: {version_pre} -> {version_post}"
