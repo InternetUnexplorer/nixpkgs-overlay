@@ -21,7 +21,6 @@ cargo-espflash.overrideAttrs (old: rec {
   });
 
   passthru.updateScript = writeShellScript "update-${old.pname}" ''
-    set -e -u -x -o pipefail
     exec ${nix-update}/bin/nix-update --flake ${old.pname} --version unstable
   '';
 })

@@ -11,7 +11,6 @@ nextpnrWithGui.overrideAttrs (final: prev: {
   };
 
   passthru.updateScript = writeShellScript "update-nextpnr-unstable" ''
-    set -e -u -x -o pipefail
     exec ${nix-update}/bin/nix-update --flake nextpnr-unstable --version branch
   '';
 })
