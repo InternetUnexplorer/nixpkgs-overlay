@@ -2,13 +2,13 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "printrun";
-  version = "printrun-2.0.1";
+  version = "2.0.1";
 
   src = fetchFromGitHub {
     owner = "kliment";
     repo = "Printrun";
-    rev = "ceeb651ca9fa4c20757ba37128b552dde4662952";
-    hash = "sha256-QIc0myqMXjWh+3mWmNIL29nKKu+s6CGLdy4LUstKPJs=";
+    rev = "printrun-${version}";
+    hash = "sha256-GmTA/C45MuptN/Y0KjpFjaLV3sWoM4rHz8AMfV9sf4U=";
   };
 
   propagatedBuildInputs = with python3Packages; [
@@ -50,7 +50,7 @@ python3Packages.buildPythonApplication rec {
   };
 
   passthru.updateScript = writeShellScript "update-${pname}" ''
-    exec ${nix-update}/bin/nix-update --flake ${pname}
+    exec ${nix-update}/bin/nix-update --flake ${pname} --version-regex 'printrun-(.*)'
   '';
   passthru.exePath = "/bin/pronterface.py";
 }
