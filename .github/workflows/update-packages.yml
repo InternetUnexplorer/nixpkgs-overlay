@@ -87,8 +87,8 @@ jobs:
 
       - name: Update ${{ matrix.package }}
         run: |
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          trap "echo '```' >> $GITHUB_STEP_SUMMARY" EXIT
+          echo '````' >> $GITHUB_STEP_SUMMARY
+          trap "echo '````' >> $GITHUB_STEP_SUMMARY" EXIT
           ./automation.py update-package ${{ matrix.package }} | tee $GITHUB_STEP_SUMMARY
 
       - name: Create pull request
@@ -103,6 +103,10 @@ jobs:
           PR_BODY=$(mktemp)
           echo 'This pull request was created automatically by GitHub Actions :)' >> $PR_BODY
           echo '<sub>**${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}**</sub>' >> $PR_BODY
+          echo '````bash' >> $PR_BODY
+          echo '$ nix build .#{{ matrix.package}}.passthru.updateScript && cat ./result' >> $PR_BODY
+          nix build .#{{ matrix.package}}.passthru.updateScript && cat ./result >> $PR_BODY
+          echo '````' >> $PR_BODY
 
           # Create the pull request and enable auto-merge.
           gh pr merge --auto --rebase --delete-branch $(gh pr create \
