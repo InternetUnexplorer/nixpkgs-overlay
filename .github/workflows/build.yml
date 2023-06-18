@@ -14,9 +14,9 @@ defaults:
     shell: bash
 
 jobs:
-  # Query which packages are in the flake and not in any binary cache.
+  # Get the list of packages to build (not broken or cached).
   generate-matrix:
-    name: Generate matrix
+    name: Get list of packages to build
     runs-on: ubuntu-latest
 
     outputs:
@@ -29,14 +29,15 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v4
 
-      - name: Generate matrix
+      - name: Get list of packages to build
         id: matrix
-        run: ./matrix.py | tee $GITHUB_STEP_SUMMARY
-
+        run: ./automation.py get-packages-to-build | tee $GITHUB_STEP_SUMMARY
+        env:
+          NIX_CONFIG: extra-substituters = https://internetunexplorer.cachix.org
 
   # Build the packages in parallel using a matrix strategy.
   build:
-    name: ${{ matrix.package }}
+    name: Build ${{ matrix.package }}
     runs-on: ubuntu-latest
     needs: generate-matrix
 
@@ -70,7 +71,7 @@ jobs:
   # matrix, so we need an extra job to report the status.
   # https://github.com/orgs/community/discussions/26822
   check-status:
-    name: Wait for jobs to succeed
+    name: Wait for build(s) to succeed
     runs-on: ubuntu-latest
     needs: build
 
