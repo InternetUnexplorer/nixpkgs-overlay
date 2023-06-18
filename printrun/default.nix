@@ -2,7 +2,7 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "printrun";
-  version = "unstable-2023-05-29";
+  version = "printrun-2.0.1";
 
   src = fetchFromGitHub {
     owner = "kliment";
