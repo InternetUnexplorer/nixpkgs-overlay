@@ -31,6 +31,7 @@ stdenv.mkDerivation rec {
   };
 
   passthru.updateScript = writeShellScript "update-${pname}" ''
+    set -e -u -x -o pipefail
     exec ${nix-update}/bin/nix-update --flake ${pname}
   '';
 }

@@ -128,7 +128,8 @@ def get_packages_to_update() -> None:
 def update_package(name: str) -> None:
     """Update the specified package and commit the changes, if any."""
     version_pre = nix_eval_json(f".#{name}.version")
-    nix("run", f".#{name}.passthru.updateScript")
+    nix("build", f".#{name}.passthru.updateScript")
+    run("./result")
     version_post = nix_eval_json(f".#{name}.version")
     if version_pre != version_post:
         commit_message = f"{name}: {version_pre} -> {version_post}"

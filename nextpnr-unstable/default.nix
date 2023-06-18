@@ -11,6 +11,7 @@ nextpnrWithGui.overrideAttrs (final: prev: {
   };
 
   passthru.updateScript = writeShellScript "update-${prev.pname}" ''
+    set -e -u -x -o pipefail
     exec ${nix-update}/bin/nix-update --flake ${prev.pname} --version branch
   '';
 })
