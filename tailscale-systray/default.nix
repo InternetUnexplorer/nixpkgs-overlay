@@ -1,5 +1,5 @@
 { lib, buildGoModule, fetchFromGitHub, pkg-config, gtk3
-, libayatana-appindicator-gtk3 }:
+, libayatana-appindicator-gtk3, writeShellScript, nix-update }:
 
 buildGoModule rec {
   pname = "tailscale-systray";
@@ -23,4 +23,9 @@ buildGoModule rec {
     license = licenses.mit;
     platforms = platforms.linux;
   };
+
+  passthru.updateScript = writeShellScript "update-${pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${pname} --version branch
+  '';
+  passthru.exePath = "/bin/tailscale-systray";
 }

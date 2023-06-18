@@ -1,4 +1,5 @@
-{ lib, rustPlatform, fetchFromGitHub, stdenv, darwin }:
+{ lib, rustPlatform, fetchFromGitHub, stdenv, darwin, writeShellScript
+, nix-update }:
 
 rustPlatform.buildRustPackage rec {
   pname = "license-generator";
@@ -16,12 +17,14 @@ rustPlatform.buildRustPackage rec {
   buildInputs =
     lib.optionals stdenv.isDarwin [ darwin.apple_sdk.frameworks.Security ];
 
-  passthru.autoUpdate = "github-releases";
-
   meta = with lib; {
     description = "Create licenses for your projects right from your terminal";
     inherit (src.meta) homepage;
     license = licenses.mit;
     platforms = platforms.all;
   };
+
+  passthru.updateScript = writeShellScript "update-${pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${pname}
+  '';
 }

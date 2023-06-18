@@ -1,4 +1,4 @@
-{ lib, fetchFromGitHub, python3Packages }:
+{ lib, fetchFromGitHub, python3Packages, writeShellScript, nix-update }:
 
 python3Packages.buildPythonApplication rec {
   pname = "printrun";
@@ -42,15 +42,15 @@ python3Packages.buildPythonApplication rec {
 
   doCheck = false;
 
-  passthru = {
-    autoUpdate = "git-commits";
-    exePath = "/bin/pronterface.py";
-  };
-
   meta = with lib; {
     description = "Pure Python 3D printing host software";
     inherit (src.meta) homepage;
     license = licenses.gpl3Plus;
     platforms = platforms.linux; # TODO
   };
+
+  passthru.updateScript = writeShellScript "update-${pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${pname}
+  '';
+  passthru.exePath = "/bin/pronterface.py";
 }

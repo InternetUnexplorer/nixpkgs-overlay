@@ -1,4 +1,4 @@
-{ nextpnrWithGui, callPackage, fetchFromGitHub }:
+{ nextpnrWithGui, callPackage, fetchFromGitHub, writeShellScript, nix-update }:
 
 nextpnrWithGui.overrideAttrs (final: prev: {
   version = "unstable-2023-06-14";
@@ -10,8 +10,7 @@ nextpnrWithGui.overrideAttrs (final: prev: {
     hash = "sha256-Zjbb61G6gF9OEBcyUf3f3Dcxf8DDfdygPqWzk7Y9Goo=";
   };
 
-  passthru = (prev.passthru or { }) // { autoUpdate = "git-commits"; };
-
-  pos.file = ./default.nix; # TODO: this seems like a hack :(
-  pos.line = 1;
+  passthru.updateScript = writeShellScript "update-${prev.pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${prev.pname} --version branch
+  '';
 })

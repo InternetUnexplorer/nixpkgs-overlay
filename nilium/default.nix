@@ -1,4 +1,4 @@
-{ stdenvNoCC, lib, fetchFromGitHub }:
+{ stdenvNoCC, lib, fetchFromGitHub, writeShellScript, nix-update }:
 
 stdenvNoCC.mkDerivation rec {
   pname = "nilium";
@@ -16,12 +16,14 @@ stdenvNoCC.mkDerivation rec {
     cp -r Nilium $out/share/plasma/desktoptheme
   '';
 
-  passthru.autoUpdate = "git-tags";
-
   meta = with lib; {
     description = "A dark theme designed from scratch for Plasma 5";
     homepage = "https://store.kde.org/p/1226329";
     license = licenses.cc-by-sa-40;
     platforms = platforms.linux;
   };
+
+  passthru.updateScript = writeShellScript "update-${pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${pname}
+  '';
 }

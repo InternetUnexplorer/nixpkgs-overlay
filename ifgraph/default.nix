@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchFromGitHub }:
+{ stdenv, lib, fetchFromGitHub, writeShellScript, nix-update }:
 
 stdenv.mkDerivation rec {
   pname = "ifgraph";
@@ -21,12 +21,15 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
-  passthru.autoUpdate = "git-commits";
-
   meta = with lib; {
     description = "Network interface grapher";
     inherit (src.meta) homepage;
     license = licenses.mit;
     platforms = platforms.linux;
   };
+
+  passthru.updateScript = writeShellScript "update-${pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${pname} --version branch
+  '';
+  passthru.exePath = "/bin/ifgraph";
 }

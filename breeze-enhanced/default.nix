@@ -1,4 +1,5 @@
-{ stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages }:
+{ stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages
+, writeShellScript, nix-update }:
 
 stdenv.mkDerivation rec {
   pname = "breeze-enhanced";
@@ -19,12 +20,14 @@ stdenv.mkDerivation rec {
     qtx11extras
   ];
 
-  passthru.autoUpdate = "git-commits";
-
   meta = with lib; {
     description = "A fork of KDE Breeze decoration with additional options";
     inherit (src.meta) homepage;
     license = licenses.gpl3;
     platforms = platforms.linux;
   };
+
+  passthru.updateScript = writeShellScript "update-${pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${pname} --version branch
+  '';
 }

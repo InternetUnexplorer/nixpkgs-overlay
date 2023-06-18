@@ -17,9 +17,4 @@ in (yosys.override { inherit abc-verifier; }).overrideAttrs (final: prev: {
   '';
 
   patches = [ ./plugin-search-dirs.patch ];
-
-  passthru = prev.passthru // { autoUpdate = "git-commits"; };
-
-  pos.file = ./default.nix; # TODO: this seems like a hack :(
-  pos.line = 1;
 })

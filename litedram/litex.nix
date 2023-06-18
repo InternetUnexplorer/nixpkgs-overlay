@@ -15,8 +15,6 @@ buildPythonApplication rec {
 
   doCheck = false; # FIXME
 
-  passthru.autoUpdate = "git-tags";
-
   meta = with lib; {
     description = "A Migen/MiSoC based Core/SoC builder";
     inherit (src.meta) homepage;

@@ -1,5 +1,5 @@
 { stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages, libavif
-, libexif }:
+, libexif, writeShellScript, nix-update }:
 
 stdenv.mkDerivation rec {
   pname = "plasma5-wallpapers-dynamic";
@@ -23,12 +23,14 @@ stdenv.mkDerivation rec {
     libexif
   ];
 
-  passthru.autoUpdate = "github-releases";
-
   meta = with lib; {
     description = "Dynamic wallpaper plugin for KDE Plasma";
     inherit (src.meta) homepage;
     license = with licenses; [ bsd3 cc-by-sa-40 cc0 gpl3Plus lgpl3Plus ];
     platforms = platforms.linux;
   };
+
+  passthru.updateScript = writeShellScript "update-${pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${pname}
+  '';
 }

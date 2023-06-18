@@ -22,8 +22,6 @@ stdenvNoCC.mkDerivation rec {
     sed -i '1i #!${stdenvNoCC.shell}' $out/bin/${progName}
   '';
 
-  passthru.exePath = "/bin/${progName}";
-
   meta = with lib; {
     description =
       "The MOST minimal fetch tool that fetches precisely NO information about your PC";
@@ -31,4 +29,6 @@ stdenvNoCC.mkDerivation rec {
     license = licenses.free;
     platforms = platforms.all;
   };
+
+  passthru.exePath = "/bin/${progName}";
 }

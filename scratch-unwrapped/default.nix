@@ -47,8 +47,6 @@ in stdenv.mkDerivation {
            $out/bin/scratch
   '';
 
-  passthru.exePath = "/bin/scratch";
-
   meta = with lib; {
     description =
       "Create and share your own interactive stories, games, music and art";
@@ -56,4 +54,6 @@ in stdenv.mkDerivation {
     license = licenses.gpl2;
     platforms = platforms.linux;
   };
+
+  passthru.exePath = "/bin/scratch";
 }

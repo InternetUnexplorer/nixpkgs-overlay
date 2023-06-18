@@ -50,12 +50,12 @@ in stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
-  passthru.exePath = "/bin/icesprog";
-
   meta = with lib; {
     description = "A programmer for the iCESugar FPGA boards";
     homepage = repo;
     license = licenses.gpl2Plus;
     platforms = [ "x86_64-linux" ]; # TODO
   };
+
+  passthru.exePath = "/bin/icesprog";
 }

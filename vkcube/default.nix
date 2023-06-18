@@ -1,6 +1,7 @@
 { stdenv, lib, fetchFromGitHub, meson, ninja, pkg-config, mesa, libpng
 , vulkan-headers, vulkan-loader, glslang, x11Support ? stdenv.isLinux, xorg
-, waylandSupport ? false, wayland, wayland-protocols }:
+, waylandSupport ? false, wayland, wayland-protocols, writeShellScript
+, nix-update }:
 
 # TODO: Wayland support seems broken?
 
@@ -27,12 +28,15 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
-  passthru.autoUpdate = "git-commits";
-
   meta = with lib; {
     description = "Spinning Vulkan cube";
     inherit (src.meta) homepage;
     license = licenses.mit;
     platforms = platforms.linux ++ platforms.darwin; # TODO: is this right?
   };
+
+  passthru.updateScript = writeShellScript "update-${pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${pname} --version branch
+  '';
+  passthru.exePath = "/bin/vkcube";
 }

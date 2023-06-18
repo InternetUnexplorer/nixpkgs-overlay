@@ -1,4 +1,5 @@
-{ stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages }:
+{ stdenv, lib, fetchFromGitHub, extra-cmake-modules, plasma5Packages
+, writeShellScript, nix-update }:
 
 stdenv.mkDerivation rec {
   pname = "klassy";
@@ -30,8 +31,6 @@ stdenv.mkDerivation rec {
     qtx11extras
   ];
 
-  passthru.autoUpdate = "github-releases";
-
   meta = with lib; {
     description =
       "A highly customizable binary Window Decoration and Application Style plugin for recent versions of the KDE Plasma desktop";
@@ -39,4 +38,8 @@ stdenv.mkDerivation rec {
     license = with licenses; [ bsd3 gpl2Plus mit ];
     platforms = platforms.linux;
   };
+
+  passthru.updateScript = writeShellScript "update-${pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${pname} --version unstable
+  '';
 }

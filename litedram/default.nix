@@ -19,15 +19,12 @@ python3Packages.buildPythonApplication rec {
 
   doCheck = false; # FIXME
 
-  passthru = {
-    autoUpdate = "git-tags";
-    exePath = "/bin/litedram_gen";
-  };
-
   meta = with lib; {
     description = "Small footprint and configurable DRAM core";
     inherit (src.meta) homepage;
     license = licenses.bsd2;
     platforms = platforms.unix;
   };
+
+  passthru.exePath = "/bin/litedram_gen";
 }

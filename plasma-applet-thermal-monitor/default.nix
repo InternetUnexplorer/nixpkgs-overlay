@@ -1,5 +1,5 @@
 { stdenv, lib, fetchFromGitLab, fetchpatch, extra-cmake-modules, plasma5Packages
-}:
+, writeShellScript, nix-update }:
 
 stdenv.mkDerivation rec {
   pname = "plasma-applet-thermal-monitor";
@@ -16,8 +16,6 @@ stdenv.mkDerivation rec {
 
   buildInputs = [ plasma5Packages.plasma-workspace ];
 
-  passthru.autoUpdate = "git-commits";
-
   meta = with lib; {
     description =
       "Plasma 5 applet for monitoring CPU, GPU and other available temperature sensors";
@@ -25,4 +23,8 @@ stdenv.mkDerivation rec {
     license = licenses.gpl2;
     platforms = platforms.linux;
   };
+
+  passthru.updateScript = writeShellScript "update-${pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${pname} --version branch
+  '';
 }
