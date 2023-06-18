@@ -44,7 +44,7 @@ def set_github_output(key: str, value: Any) -> None:
     """Set the specified (JSON) output if running in GitHub Actions."""
     if "GITHUB_OUTPUT" in environ:
         with open(environ["GITHUB_OUTPUT"], "a") as file:
-            print(f"${key}={json.dumps(value)}", file=file)
+            print(f"{key}={json.dumps(value)}", file=file)
 
 
 ################################################################
