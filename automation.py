@@ -7,7 +7,7 @@ from os import environ
 from subprocess import DEVNULL, PIPE, CompletedProcess
 from subprocess import run as _run
 from sys import stderr
-from typing import Any, List, Set
+from typing import Any, Dict, List, Set
 
 ################################################################
 ## General Utilities
@@ -29,6 +29,15 @@ def nix(*args: str) -> str:
 def nix_eval_json(*args: str) -> Any:
     """Run `nix eval --json <ARGS>` and parse and return the output."""
     return json.loads(nix("eval", "--json", *args))
+
+
+def nix_config() -> Dict[str, str]:
+    """Run `nix show-config` and parse and return the output."""
+    return dict(
+        line.split(" = ", 1)
+        for line in nix("show-config").splitlines()
+        if " = " in line
+    )
 
 
 def set_github_output(key: str, value: Any) -> None:
@@ -91,7 +100,7 @@ def print_packages(title: str, packages: Set[Package]) -> None:
 
 def get_packages_to_build() -> None:
     """Get the list of packages to build (not broken or cached)."""
-    caches = list(nix("show-config", "substituters").split())
+    caches = nix_config()["substituters"].split()
     all_packages = get_all_packages()
     broken_packages = {package for package in all_packages if package.broken}
     cached_packages = {
@@ -141,3 +150,4 @@ if __name__ == "__main__":
         }[args.command]()
     except Exception as error:
         print(f"\033[31m{type(error).__name__}: {error}\033[0m", file=stderr)
+        exit(1)
