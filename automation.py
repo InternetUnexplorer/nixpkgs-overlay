@@ -44,8 +44,7 @@ def set_github_output(key: str, value: Any) -> None:
     """Set the specified (JSON) output if running in GitHub Actions."""
     if "GITHUB_OUTPUT" in environ:
         with open(environ["GITHUB_OUTPUT"], "a") as file:
-            packages = [package.name for package in value]
-            print(f"${key}={json.dumps(packages)}", file=file)
+            print(f"${key}={json.dumps(value)}", file=file)
 
 
 ################################################################
@@ -100,7 +99,8 @@ def print_packages(title: str, packages: Set[Package]) -> None:
 
 def get_packages_to_build() -> None:
     """Get the list of packages to build (not broken or cached)."""
-    caches = nix_config()["substituters"].split()
+    # Reverse substituters so that extra-substituters are checked first.
+    caches = list(reversed(nix_config()["substituters"].split()))
     all_packages = get_all_packages()
     broken_packages = {package for package in all_packages if package.broken}
     cached_packages = {
@@ -112,7 +112,7 @@ def get_packages_to_build() -> None:
     print_packages("These packages will be built", packages_to_build)
     print_packages("These packages are marked as broken", broken_packages)
     print_packages("These packages have already been built", cached_packages)
-    set_github_output("packages", packages_to_build)
+    set_github_output("packages", [package.name for package in packages_to_build])
 
 
 def get_packages_to_update() -> None:
@@ -122,6 +122,7 @@ def get_packages_to_update() -> None:
         package for package in all_packages if package.has_update_script
     }
     print_packages("These packages support automated updates", packages_to_update)
+    set_github_output("packages", [package.name for package in packages_to_update])
 
 
 def update_package(name: str) -> None:
