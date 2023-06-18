@@ -10,8 +10,8 @@ nextpnrWithGui.overrideAttrs (final: prev: {
     hash = "sha256-Zjbb61G6gF9OEBcyUf3f3Dcxf8DDfdygPqWzk7Y9Goo=";
   };
 
-  passthru.updateScript = writeShellScript "update-${prev.pname}" ''
+  passthru.updateScript = writeShellScript "update-nextpnr-unstable" ''
     set -e -u -x -o pipefail
-    exec ${nix-update}/bin/nix-update --flake ${prev.pname} --version branch
+    exec ${nix-update}/bin/nix-update --flake nextpnr-unstable --version branch
   '';
 })

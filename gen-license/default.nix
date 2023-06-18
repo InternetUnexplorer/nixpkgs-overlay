@@ -2,7 +2,7 @@
 , nix-update }:
 
 rustPlatform.buildRustPackage rec {
-  pname = "license-generator";
+  pname = "gen-license";
   version = "0.1.2";
 
   src = fetchFromGitHub {
