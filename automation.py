@@ -4,7 +4,8 @@ import json
 from argparse import ArgumentParser
 from dataclasses import dataclass
 from os import environ
-from subprocess import DEVNULL, PIPE, run
+from subprocess import DEVNULL, PIPE, CompletedProcess
+from subprocess import run as _run
 from sys import stderr
 from typing import Any, List, Set
 
@@ -13,15 +14,20 @@ from typing import Any, List, Set
 ################################################################
 
 
+def run(*command: str, **kwargs) -> CompletedProcess[Any]:
+    """Wrapper around `run` that prints the command."""
+    format_arg = lambda arg: repr(arg) if " " in arg else arg
+    print(f"\033[34m$ {' '.join(map(format_arg, command))}\033[0m", file=stderr)
+    return _run(list(command), **kwargs)
+
+
 def nix(*args: str) -> str:
     """Run `nix <ARGS>` and return the output."""
-    format_arg = lambda arg: repr(arg) if " " in arg else arg
-    print(f"\033[34m$ nix {' '.join(map(format_arg, args))}\033[0m", file=stderr)
-    return run(["nix", *args], stdout=PIPE, check=True).stdout.decode("utf-8")
+    return run("nix", *args, stdout=PIPE, check=True).stdout.decode("utf-8")
 
 
 def nix_eval_json(*args: str) -> Any:
-    """Run `nix eval --json <ARGS>` and return the JSON output."""
+    """Run `nix eval --json <ARGS>` and parse and return the output."""
     return json.loads(nix("eval", "--json", *args))
 
 
@@ -48,7 +54,7 @@ class Package:
     def is_in_cache(self, cache: str) -> bool:
         """Check whether the package is in the specified binary cache."""
         command = ["nix", "path-info", "--store", cache, self.path]
-        return run(command, stdout=DEVNULL, stderr=DEVNULL).returncode == 0
+        return run(*command, stdout=DEVNULL, stderr=DEVNULL).returncode == 0
 
     def is_in_any_cache(self, caches: List[str]) -> bool:
         """Check whether the package is in any of the specified binary caches."""
@@ -107,7 +113,17 @@ def get_packages_to_update() -> None:
         package for package in all_packages if package.has_update_script
     }
     print_packages("These packages support automated updates", packages_to_update)
-    set_github_output("packages", packages_to_update)
+
+
+def update_package(name: str) -> None:
+    """Update the specified package and commit the changes, if any."""
+    version_pre = nix_eval_json(f".#{name}.version")
+    nix("build", f".#{name}.passthru.updateScript")
+    run(f"./result")
+    version_post = nix_eval_json(f".#{name}.version")
+    if version_pre != version_post:
+        commit_message = f"{name}: {version_pre} -> {version_post}"
+        run("git", "commit", "-m", commit_message, "--", name)
 
 
 if __name__ == "__main__":
@@ -115,7 +131,14 @@ if __name__ == "__main__":
     command = parser.add_subparsers(dest="command", required=True)
     command.add_parser("get-packages-to-build", help="get list of packages to build")
     command.add_parser("get-packages-to-update", help="get list of packages to update")
-    {
-        "get-packages-to-build": get_packages_to_build,
-        "get-packages-to-update": get_packages_to_update,
-    }[parser.parse_args().command]()
+    update = command.add_parser("update-package", help="update the specified package")
+    update.add_argument("name", help="name of the package to update")
+    args = parser.parse_args()
+    try:
+        {
+            "get-packages-to-build": get_packages_to_build,
+            "get-packages-to-update": get_packages_to_update,
+            "update-package": lambda: update_package(args.name),
+        }[args.command]()
+    except Exception as error:
+        print(f"\033[31m{type(error).__name__}: {error}\033[0m", file=stderr)
