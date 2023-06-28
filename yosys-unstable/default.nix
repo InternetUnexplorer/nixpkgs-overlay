@@ -25,7 +25,7 @@ in (yosys.override { inherit abc-verifier; }).overrideAttrs (final: prev: {
     ${nix-update}/bin/nix-update --flake yosys-unstable --version branch
     YOSYS_SRC=$(nix build .#yosys-unstable.src --no-link --print-out-paths)
     ABCREV=$(awk '/^ABCREV/ {print $NF}' $YOSYS_SRC/Makefile)
-    ${nix-update}/bin/nix-update --flake yosys-unstable.abc-verifier --version branch="$ABCREV"
+    ${nix-update}/bin/nix-update --flake yosys-unstable.abc-verifier --version branch=$ABCREV
   '';
   passthru.exePath = "/bin/yosys";
 })
