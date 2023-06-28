@@ -44,6 +44,7 @@ in stdenv.mkDerivation {
            -e "s|SQ_DIR=.*|SQ_DIR=$(echo ${squeak}/lib/squeak/*)|" \
            -e "s|/usr/lib/scratch|$out/lib/scratch|g"              \
            -e 's|-vm-sound-ALSA|-vm-sound-pulse|'                  \
+           -e 's|-xshm||'                                          \
            $out/bin/scratch
   '';
 
