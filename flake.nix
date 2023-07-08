@@ -12,7 +12,7 @@
   outputs = { self, nixpkgs }:
     let
       allSystems = nixpkgs.lib.systems.flakeExposed;
-      forAllSystems = gen: nixpkgs.lib.genAttrs allSystems gen;
+      forAllSystems = nixpkgs.lib.genAttrs allSystems;
     in {
       packages = forAllSystems (system:
         let
@@ -25,8 +25,7 @@
 
       apps = forAllSystems (system:
         let
-          isApp = _: package:
-            nixpkgs.lib.hasAttrByPath [ "passthru" "exePath" ] package;
+          isApp = _: nixpkgs.lib.hasAttrByPath [ "passthru" "exePath" ];
           mkApp = _: package: {
             type = "app";
             program = "${package}${package.passthru.exePath}";
