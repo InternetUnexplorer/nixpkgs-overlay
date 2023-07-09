@@ -4,7 +4,7 @@ import json
 from argparse import ArgumentParser
 from dataclasses import dataclass
 from os import environ
-from subprocess import DEVNULL, PIPE, CompletedProcess
+from subprocess import DEVNULL, PIPE, STDOUT, CompletedProcess
 from subprocess import run as _run
 from sys import stderr
 from typing import Any, Dict, List, Set
@@ -129,7 +129,7 @@ def update_package(name: str) -> None:
     """Update the specified package and commit the changes, if any."""
     version_pre = nix_eval_json(f".#{name}.version")
     nix("build", f".#{name}.passthru.updateScript")
-    run("./result", check=True)
+    run("./result", stderr=STDOUT, check=True)
     version_post = nix_eval_json(f".#{name}.version")
     if version_pre != version_post:
         commit_message = f"{name}: {version_pre} -> {version_post}"
