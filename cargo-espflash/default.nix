@@ -17,7 +17,7 @@ cargo-espflash.overrideAttrs (old: rec {
 
   cargoDeps = old.cargoDeps.overrideAttrs (_: {
     inherit src;
-    outputHash = "sha256-H7DN3JF/SfkYNg1GaWqCZ4u0zQO/IT48jy74xibO6iM=";
+    outputHash = "sha256-8VIAmmtaQoIvD7wN+W3yUM0CEDadOQrv1wnJ4/AWKFA=";
   });
 
   passthru.updateScript = writeShellScript "update-${old.pname}" ''
