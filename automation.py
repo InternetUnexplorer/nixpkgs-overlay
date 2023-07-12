@@ -3,10 +3,10 @@
 import json
 from argparse import ArgumentParser
 from dataclasses import dataclass
-from os import environ
+from os import chdir, environ
 from subprocess import DEVNULL, PIPE, STDOUT, CompletedProcess
 from subprocess import run as _run
-from sys import stderr
+from sys import stderr, path
 from typing import Any, Dict, List, Set
 
 ################################################################
@@ -129,7 +129,7 @@ def update_package(name: str) -> None:
     """Update the specified package and commit the changes, if any."""
     version_pre = nix_eval_json(f".#{name}.version")
     nix("build", f".#{name}.passthru.updateScript")
-    run("./result", stderr=STDOUT, check=True)
+    run("./result", name, stderr=STDOUT, check=True)
     version_post = nix_eval_json(f".#{name}.version")
     if version_pre != version_post:
         commit_message = f"{name}: {version_pre} -> {version_post}"
@@ -137,6 +137,7 @@ def update_package(name: str) -> None:
 
 
 if __name__ == "__main__":
+    chdir(path[0])
     parser = ArgumentParser(description="nixpkgs-overlay automation helper")
     command = parser.add_subparsers(dest="command", required=True)
     command.add_parser("get-packages-to-build", help="get list of packages to build")
