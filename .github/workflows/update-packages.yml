@@ -90,6 +90,11 @@ jobs:
           echo \`\`\`\`text >> $GITHUB_STEP_SUMMARY
           trap 'echo \`\`\`\` >> $GITHUB_STEP_SUMMARY' EXIT
           ./automation.py update-package ${{ matrix.package }} | tee -a $GITHUB_STEP_SUMMARY
+        env:
+          # TODO: This token is needed by update scripts that use the `gh` cli,
+          # but preferably there would be some way to avoid using a token with
+          # write permissions (just to be safe).
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create pull request
         run: |
