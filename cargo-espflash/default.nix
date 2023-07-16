@@ -2,13 +2,13 @@
 }:
 
 cargo-espflash.overrideAttrs (old: rec {
-  version = "2.0.0";
+  version = "2.0.1";
 
   src = fetchFromGitHub {
     owner = "esp-rs";
     repo = "espflash";
     rev = "v${version}";
-    hash = "sha256-3E0OC8DVP2muLyoN4DQfrdnK+idQEm7IpaA/CUIyYnU=";
+    hash = "sha256-PYW5OM3pbmROeGkbGiLhnVGrYq6xn3B1Z4sbIjtAPlk=";
   };
 
   buildInputs = [ openssl udev ];
@@ -17,7 +17,7 @@ cargo-espflash.overrideAttrs (old: rec {
 
   cargoDeps = old.cargoDeps.overrideAttrs (_: {
     inherit src;
-    outputHash = "sha256-8VIAmmtaQoIvD7wN+W3yUM0CEDadOQrv1wnJ4/AWKFA=";
+    outputHash = "sha256-1H1Ex3l93O8c/BqLK/HQN81G8c2a+gUjvMuG4SAPxPY=";
   });
 
   passthru.updateScript = writeShellScript "update-${old.pname}" ''
