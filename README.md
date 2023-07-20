@@ -10,6 +10,7 @@ binary cache][1].
 
 The following files were copied from Nixpkgs and are subject to the [Nixpkgs license][2]:
 
+- [easyeffects_7_0_4/default.nix](easyeffects_7_0_4/default.nix)
 - [ksysguard/ksysguard.nix](./ksysguard/ksysguard.nix)
 - [squeak_4_10/squeak_4_10.nix](./squeak_4_10/squeak_4_10.nix)
 - [yosys-unstable/plugin-search-dirs.patch](./yosys-unstable/plugin-search-dirs.patch)
