@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "A KDE Plasmoid for displaying system temperatures";
     inherit (src.meta) homepage;
-    license = licenses.wtfpl;
+    license = licenses.mit;
     platforms = platforms.linux;
   };
 
