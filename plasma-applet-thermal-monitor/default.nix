@@ -3,13 +3,13 @@
 
 stdenv.mkDerivation rec {
   pname = "plasma-applet-thermal-monitor";
-  version = "unstable-2023-05-06";
+  version = "unstable-2023-08-28";
 
   src = fetchFromGitLab {
     owner = "agurenko";
     repo = "plasma-applet-thermal-monitor";
-    rev = "146f3148ccf1b95556278fd3c6f024842cb45c9d";
-    hash = "sha256-EzbNKu+RBq5ZHbUveBEkwt2mMPMd3soaqJPXjD/1MnQ=";
+    rev = "438f829d4e5ebfa45247935713ad46643fdd3c39";
+    hash = "sha256-ywxw+3+MvMYjKTw+nXy161CciURHWxuNYbRXgX9d7XE=";
   };
 
   nativeBuildInputs = [ extra-cmake-modules plasma5Packages.wrapQtAppsHook ];
