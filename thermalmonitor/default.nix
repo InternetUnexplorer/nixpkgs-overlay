@@ -2,14 +2,14 @@
 
 stdenv.mkDerivation rec {
   pname = "thermalmonitor";
-  version = "0.1.1-kf5";
+  version = "0.1.2-kf5";
 
   src = fetchFromGitLab {
     domain = "invent.kde.org";
     owner = "olib";
     repo = "thermalmonitor";
     rev = "v${version}";
-    hash = "sha256-AxoWwGpJkfXNXl1uol3RfqsB8n7ry0satyAfJnK1aZY=";
+    hash = "sha256-biE9oygebz1bSmCdq39qJdeXUDMjdyEqQRCXCPVtOsI=";
   };
 
   buildInputs = with plasma5Packages; [
