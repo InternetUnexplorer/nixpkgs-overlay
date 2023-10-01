@@ -1,13 +1,13 @@
 { nextpnrWithGui, callPackage, fetchFromGitHub, writeShellScript, nix-update }:
 
 nextpnrWithGui.overrideAttrs (final: prev: {
-  version = "unstable-2023-09-16";
+  version = "unstable-2023-09-28";
 
   src = fetchFromGitHub {
     owner = "YosysHQ";
     repo = "nextpnr";
-    rev = "8e84006ee71ce941b4f089bd824ce139f4cefad5";
-    hash = "sha256-IND5SHjqwR6jql+npLT3F/znxgdBikl0c9KNIEQ8lwo=";
+    rev = "e8602fb56dce316be506fb69a12f6380eb113712";
+    hash = "sha256-H0Sv0j0pZj9sc0/fbANgbX1KwXgXABpIReNyLIAuRGM=";
   };
 
   passthru.updateScript = writeShellScript "update-nextpnr-unstable" ''
