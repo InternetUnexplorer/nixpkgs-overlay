@@ -1,23 +1,23 @@
 {
-  "version": "1.72.1.0",
-  "rust-1.72.1.0-aarch64-apple-darwin.tar.xz": {
-    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.72.1.0/rust-1.72.1.0-aarch64-apple-darwin.tar.xz",
-    "hash": "sha256-+bpNlDA3rDrDmh/HMPHFVHz2ITOaRIolSfYKOyyT7lM="
+  "version": "1.73.0.0",
+  "rust-1.73.0.0-aarch64-apple-darwin.tar.xz": {
+    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.73.0.0/rust-1.73.0.0-aarch64-apple-darwin.tar.xz",
+    "hash": "sha256-Lx1uxfYQ76J25v8ZVXXut1VRcS1d+rxRiETKANPVLnM="
   },
-  "rust-1.72.1.0-aarch64-unknown-linux-gnu.tar.xz": {
-    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.72.1.0/rust-1.72.1.0-aarch64-unknown-linux-gnu.tar.xz",
-    "hash": "sha256-FmLQG3qR156gk6Mo++IwEJs4FEQGsB3/NSYbyjkkLpE="
+  "rust-1.73.0.0-aarch64-unknown-linux-gnu.tar.xz": {
+    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.73.0.0/rust-1.73.0.0-aarch64-unknown-linux-gnu.tar.xz",
+    "hash": "sha256-Ka/4+6xFt10Q5SGqMud1QIV6hzDl4eATRl6V5xa4RYI="
   },
-  "rust-1.72.1.0-x86_64-apple-darwin.tar.xz": {
-    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.72.1.0/rust-1.72.1.0-x86_64-apple-darwin.tar.xz",
-    "hash": "sha256-oQRFj1GwjrWqmeN2OMt3QfW70O50rG0q8ZzDn8MzGAM="
+  "rust-1.73.0.0-x86_64-apple-darwin.tar.xz": {
+    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.73.0.0/rust-1.73.0.0-x86_64-apple-darwin.tar.xz",
+    "hash": "sha256-Sy3BWanZj4j1mgpcvO81kcW3vWMFEkz7WHKYl4+NsLE="
   },
-  "rust-1.72.1.0-x86_64-unknown-linux-gnu.tar.xz": {
-    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.72.1.0/rust-1.72.1.0-x86_64-unknown-linux-gnu.tar.xz",
-    "hash": "sha256-S4+SBTlT99gUCa6Vw+IbeaUPypGL9MmAQg03Vmlixhw="
+  "rust-1.73.0.0-x86_64-unknown-linux-gnu.tar.xz": {
+    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.73.0.0/rust-1.73.0.0-x86_64-unknown-linux-gnu.tar.xz",
+    "hash": "sha256-Iy2u/SEgQQPj0UILm7v3Ga7RTp/wsynW0shbiwa3fxU="
   },
-  "rust-src-1.72.1.0.tar.xz": {
-    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.72.1.0/rust-src-1.72.1.0.tar.xz",
-    "hash": "sha256-ScVRX5Mu3gDb62tA0Yho6bJDecgXT43+GwJ4na/xrjs="
+  "rust-src-1.73.0.0.tar.xz": {
+    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.73.0.0/rust-src-1.73.0.0.tar.xz",
+    "hash": "sha256-P1uWCWVkoTh5uLjDrAdLE6/g6WDsExQySSKKr3JC9yA="
   }
 }
