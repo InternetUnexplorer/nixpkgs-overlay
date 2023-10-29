@@ -3,13 +3,13 @@
 let abc-verifier = callPackage ./abc-verifier.nix { };
 
 in (yosys.override { inherit abc-verifier; }).overrideAttrs (final: prev: {
-  version = "unstable-2023-10-17";
+  version = "unstable-2023-10-26";
 
   src = fetchFromGitHub {
     owner = "YosysHQ";
     repo = "yosys";
-    rev = "d21c464ae4212abc8a413ecd12c3c1bdc04fb100";
-    hash = "sha256-HYgmIkEonear3QVBFOjUcN0AGhi0+M7HFUEH0Yf58o0=";
+    rev = "672375ed02be68733856e616a5f4fbf281fe7733";
+    hash = "sha256-MQs6eiFvl6Bta/PjUDdYPdPv7tsJtofZ14TVLHDvArc=";
   };
 
   inherit abc-verifier;
