@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v6
+        uses: DeterminateSystems/nix-installer-action@v8
 
       - name: Get list of packages to update
         id: matrix
@@ -76,7 +76,7 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v6
+        uses: DeterminateSystems/nix-installer-action@v8
 
       # This will fail if the branch already exists; since pull requests created
       # by this workflow should be auto-merged, an existing branch either means
