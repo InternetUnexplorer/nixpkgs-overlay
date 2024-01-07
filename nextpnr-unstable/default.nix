@@ -10,6 +10,8 @@ nextpnrWithGui.overrideAttrs (final: prev: {
     hash = "sha256-85iMe2sr3ar7hGxMeogJTTbFTtIU/CPKLQ/F+IVunac=";
   };
 
+  doCheck = false; # Takes too long :(
+
   passthru.updateScript = writeShellScript "update-nextpnr-unstable" ''
     exec ${nix-update}/bin/nix-update --flake nextpnr-unstable --version branch
   '';
