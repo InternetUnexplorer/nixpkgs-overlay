@@ -3,16 +3,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "gen-license";
-  version = "0.1.2";
+  version = "0.1.4";
 
   src = fetchFromGitHub {
     owner = "nexxeln";
     repo = "license-generator";
     rev = version;
-    hash = "sha256-lecEWhxt035BUJ4Giqo5u1nDOaeo1C1VxEyB+I3+yB0=";
+    hash = "sha256-VOmt8JXd2+ykhkhupv/I4RfXz9P0eEesW3JGAoXStUI=";
   };
 
-  cargoHash = "sha256-2PT20eoXxBPhGsmHlEEGE2ZDyhyrD7tFdwnn3khjKNo=";
+  cargoHash = "sha256-TEsWACxEs4eJ8rO4RnKJWpwT1KcDoBEGftHSJt4YXVw=";
 
   buildInputs =
     lib.optionals stdenv.isDarwin [ darwin.apple_sdk.frameworks.Security ];
