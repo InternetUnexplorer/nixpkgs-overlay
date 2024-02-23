@@ -28,4 +28,7 @@ in (yosys.override { inherit abc-verifier; }).overrideAttrs (final: prev: {
     ${nix-update}/bin/nix-update --flake yosys-unstable.abc-verifier --version branch=$ABCREV
   '';
   passthru.exePath = "/bin/yosys";
+
+  # plugin-search-dirs.patch needs to be updated!
+  meta = prev.meta // { broken = true; };
 })
