@@ -3,13 +3,13 @@
 
 stdenv.mkDerivation rec {
   pname = "plasma5-wallpapers-dynamic";
-  version = "4.4.1";
+  version = "5.0.0";
 
   src = fetchFromGitHub {
     owner = "zzag";
     repo = "plasma5-wallpapers-dynamic";
     rev = version;
-    hash = "sha256-0pCx6JNyMlx36r59tvId1k6nIdrU9hCpn4ozEiGVagE=";
+    hash = "sha256-GXx1h3Q0iautYfC7LBEZDKnEdVA3kAldTh0aSL6VnJw=";
   };
 
   nativeBuildInputs = [ extra-cmake-modules plasma5Packages.wrapQtAppsHook ];
