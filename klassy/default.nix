@@ -3,13 +3,13 @@
 
 stdenv.mkDerivation rec {
   pname = "klassy";
-  version = "5.0.breeze5.27.11";
+  version = "6.0.breeze6.0.2";
 
   src = fetchFromGitHub {
     owner = "paulmcauley";
     repo = "klassy";
     rev = version;
-    hash = "sha256-Nf0apaCIxKJZzljbK9iM9gIL3/XatcJ4SLEKb4rIjh0=";
+    hash = "sha256-Jp7CLbsEhz+et3PCTAhtopaFvkZkWPf2BGXAj7nlfY4=";
   };
 
   outputs = [ "bin" "dev" "out" ];
