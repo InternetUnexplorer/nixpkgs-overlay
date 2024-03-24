@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation rec {
   pname = "ifgraph";
-  version = "unstable-2023-09-10";
+  version = "0-unstable-2023-09-10";
 
   src = fetchFromGitHub {
     owner = "stolk";
