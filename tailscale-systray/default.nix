@@ -3,7 +3,7 @@
 
 buildGoModule rec {
   pname = "tailscale-systray";
-  version = "unstable-2022-10-19";
+  version = "0-unstable-2022-10-19";
 
   src = fetchFromGitHub {
     owner = "mattn";
