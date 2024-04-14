@@ -1,7 +1,7 @@
 { abc-verifier, fetchFromGitHub }:
 
 abc-verifier.overrideAttrs (final: prev: {
-  version = "yosys-0.39-unstable-2024-03-04";
+  version = "yosys-0.40-unstable-2024-03-04";
 
   src = fetchFromGitHub {
     owner = "yosysHQ";
