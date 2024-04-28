@@ -1,13 +1,13 @@
 { abc-verifier, fetchFromGitHub }:
 
 abc-verifier.overrideAttrs (final: prev: {
-  version = "yosys-0.40-unstable-2024-03-04";
+  version = "yosys-0.40-unstable-2024-04-23";
 
   src = fetchFromGitHub {
     owner = "yosysHQ";
     repo = "abc";
-    rev = "0cd90d0d2c5338277d832a1d890bed286486bcf5";
-    hash = "sha256-1v/HOYF/ZdfR75eC3uYySKs2k6ZLCTUI0rtzPQs0hKQ=";
+    rev = "03da96f12fb4deb153cc0dc73936df346ecd4bcf";
+    hash = "sha256-1VHI03S3POkD+LJzBdnhLy1GPzAcbEzctbUhnUPd21k=";
   };
 
   passthru = (prev.passthru or { }) // { inherit (final.src) rev; };
