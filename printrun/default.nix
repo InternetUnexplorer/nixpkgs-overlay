@@ -15,7 +15,7 @@ python3Packages.buildPythonApplication rec {
     appdirs
     cairocffi
     cairosvg
-    cython_3
+    cython
     lxml
     numpy
     psutil
