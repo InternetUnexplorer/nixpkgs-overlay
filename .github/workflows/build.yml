@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v10
+        uses: DeterminateSystems/nix-installer-action@v11
 
       - name: Get list of packages to build
         id: matrix
@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v10
+        uses: DeterminateSystems/nix-installer-action@v11
 
       # cachix-action will take care of pushing everything to the binary cache.
       - name: Set up binary cache
