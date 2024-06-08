@@ -28,6 +28,7 @@ stdenv.mkDerivation rec {
     inherit (src.meta) homepage;
     license = with licenses; [ bsd3 cc-by-sa-40 cc0 gpl3Plus lgpl3Plus ];
     platforms = platforms.linux;
+    broken = true;
   };
 
   passthru.updateScript = writeShellScript "update-${pname}" ''

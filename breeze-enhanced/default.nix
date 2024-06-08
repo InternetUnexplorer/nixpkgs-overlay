@@ -25,6 +25,7 @@ stdenv.mkDerivation rec {
     inherit (src.meta) homepage;
     license = licenses.gpl3;
     platforms = platforms.linux;
+    broken = true;
   };
 
   passthru.updateScript = writeShellScript "update-${pname}" ''
