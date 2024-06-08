@@ -1,24 +1,24 @@
-{ lib, stdenv, fetchFromGitLab, plasma5Packages, writeShellScript, nix-update }:
+{ lib, stdenv, fetchFromGitLab, kdePackages, writeShellScript, nix-update }:
 
 stdenv.mkDerivation rec {
   pname = "thermalmonitor";
-  version = "0.1.3";
+  version = "0.1.5";
 
   src = fetchFromGitLab {
     domain = "invent.kde.org";
     owner = "olib";
     repo = "thermalmonitor";
     rev = "v${version}";
-    hash = "sha256-Gp2PWn8arDblIrgZYuBf08GJ29Nwg4cY33xoJXdD/t8=";
+    hash = "sha256-3lVg/j4RcNKUOMzcTRErPIWNCVABbfgbEKwZ1oAKJ7A=";
   };
 
-  buildInputs = with plasma5Packages; [
+  buildInputs = with kdePackages; [
     ksystemstats
     libksysguard
     kitemmodels
     kdeclarative
   ];
-  nativeBuildInputs = [ plasma5Packages.extra-cmake-modules ];
+  nativeBuildInputs = [ kdePackages.extra-cmake-modules ];
 
   dontWrapQtApps = true;
 
