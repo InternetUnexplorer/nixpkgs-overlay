@@ -16,9 +16,13 @@
     in {
       packages = forAllSystems (system:
         let
-          allPackages = import ./all-packages.nix {
-            inherit (nixpkgs.legacyPackages.${system}) lib callPackage;
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowBroken = true;
+            config.allowUnfree = true;
           };
+          allPackages =
+            import ./all-packages.nix { inherit (pkgs) lib callPackage; };
           isSupported = _: package:
             nixpkgs.lib.elem system package.meta.platforms;
         in nixpkgs.lib.filterAttrs isSupported allPackages);

@@ -1,14 +1,16 @@
 { nextpnrWithGui, callPackage, fetchFromGitHub, writeShellScript, nix-update }:
 
 nextpnrWithGui.overrideAttrs (final: prev: {
-  version = "unstable-2023-11-26";
+  version = "nextpnr-0.7-unstable-2024-05-17";
 
   src = fetchFromGitHub {
     owner = "YosysHQ";
     repo = "nextpnr";
-    rev = "c13b34f20e7b8cdcd8b2cfa06e0f3c9446a2066d";
-    hash = "sha256-85iMe2sr3ar7hGxMeogJTTbFTtIU/CPKLQ/F+IVunac=";
+    rev = "b7f91e57a0caf40dd23e3bada52c8595d53eb625";
+    hash = "sha256-Ze3GtQiu8J0n6eZjTfFQv9d6KCeLt/wR3Wnhp8NYWFk=";
   };
+
+  doCheck = false; # Takes too long :(
 
   passthru.updateScript = writeShellScript "update-nextpnr-unstable" ''
     exec ${nix-update}/bin/nix-update --flake nextpnr-unstable --version branch

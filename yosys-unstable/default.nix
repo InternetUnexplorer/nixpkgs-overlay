@@ -3,13 +3,13 @@
 let abc-verifier = callPackage ./abc-verifier.nix { };
 
 in (yosys.override { inherit abc-verifier; }).overrideAttrs (final: prev: {
-  version = "unstable-2023-11-24";
+  version = "yosys-0.40-unstable-2024-05-04";
 
   src = fetchFromGitHub {
     owner = "YosysHQ";
     repo = "yosys";
-    rev = "031ad38b5cc2410823089e1990cd68694a4a9bb3";
-    hash = "sha256-KMuuBg+bu4PWWuAU2p1WdViFonIawCcXUJSRz1cuDLE=";
+    rev = "0f9ee20ea2c9b377f9b28b862f77b197e6485e00";
+    hash = "sha256-gFg17sRAIF+61akeBHSxOU27meNV2/PRHRGMrXSjeMY=";
   };
 
   inherit abc-verifier;
@@ -28,4 +28,7 @@ in (yosys.override { inherit abc-verifier; }).overrideAttrs (final: prev: {
     ${nix-update}/bin/nix-update --flake yosys-unstable.abc-verifier --version branch=$ABCREV
   '';
   passthru.exePath = "/bin/yosys";
+
+  # plugin-search-dirs.patch needs to be updated!
+  meta = prev.meta // { broken = true; };
 })

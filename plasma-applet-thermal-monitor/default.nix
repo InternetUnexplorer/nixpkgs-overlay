@@ -3,7 +3,7 @@
 
 stdenv.mkDerivation rec {
   pname = "plasma-applet-thermal-monitor";
-  version = "unstable-2023-08-28";
+  version = "1.3.0-unstable-2023-08-28";
 
   src = fetchFromGitLab {
     owner = "agurenko";
