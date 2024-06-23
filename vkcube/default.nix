@@ -7,13 +7,13 @@
 
 stdenv.mkDerivation rec {
   pname = "vkcube";
-  version = "0-unstable-2022-11-09";
+  version = "0-unstable-2024-06-17";
 
   src = fetchFromGitHub {
     owner = "krh";
     repo = "vkcube";
-    rev = "f77395324a3297b2b6ffd7bce0383073e4670190";
-    hash = "sha256-wGcQpfJqfK+hYVn4PsI8NjlP5HC40QKZPBE2oeEdgaI=";
+    rev = "ffd566971fac916fc90d33a442369d5717ceb2a9";
+    hash = "sha256-pl4iZxcBYkNwB5GGncQUcr8VEd2+sQf5v66YBR2EEj0=";
   };
 
   nativeBuildInputs = [ meson ninja pkg-config glslang ];
