@@ -1,6 +1,6 @@
-{ lib, fetchFromGitHub, python3Packages, writeShellScript, nix-update }:
+{ lib, fetchFromGitHub, python311Packages, writeShellScript, nix-update }:
 
-python3Packages.buildPythonApplication rec {
+python311Packages.buildPythonApplication rec {
   pname = "printrun";
   version = "2.1.0";
 
@@ -11,7 +11,7 @@ python3Packages.buildPythonApplication rec {
     hash = "sha256-MANgxE3z8xq8ScxdxhwfEVsLMF9lgcdSjJZ0qu5p3ps=";
   };
 
-  propagatedBuildInputs = with python3Packages; [
+  propagatedBuildInputs = with python311Packages; [
     appdirs
     cairocffi
     cairosvg
