@@ -4,11 +4,11 @@ let repository = "https://github.com/mishamyrt/Lilex";
 
 in stdenv.mkDerivation rec {
   pname = "lilex";
-  version = "2.510";
+  version = "2.520";
 
   src = fetchzip {
     url = "${repository}/releases/download/${version}/Lilex.zip";
-    hash = "sha256-f0y+u6qlRl+DIvJPe/p0MqvNm0FVzDUQ2WyoAN6Ihqg=";
+    hash = "sha256-EClOxZl0OP8oXwH+VY8aehK4F8Bm9wyKZnFD64ZxQRY=";
     stripRoot = false;
   };
 
