@@ -3,7 +3,7 @@
 
 stdenv.mkDerivation rec {
   pname = "breeze-enhanced";
-  version = "V5.27-unstable-2024-03-17";
+  version = "V6.0-unstable-2024-03-17";
 
   src = fetchFromGitHub {
     owner = "tsujan";
