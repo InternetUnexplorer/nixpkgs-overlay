@@ -44,7 +44,7 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v13
+        uses: DeterminateSystems/nix-installer-action@v14
 
       # This will fail if the branch already exists; since pull requests created
       # by this workflow should be auto-merged, an existing branch either means
