@@ -1,4 +1,4 @@
-{ lib, symlinkJoin, buildFHSUserEnv, writeShellScriptBin, xdg-utils, callPackage
+{ lib, symlinkJoin, buildFHSEnv, writeShellScriptBin, xdg-utils, callPackage
 , unwrapped ? callPackage ../scratch-unwrapped { } }:
 
 # Scratch.image contains a bunch of references to /usr/share/scratch (example
@@ -13,7 +13,7 @@ let
     exec ${xdg-utils}/bin/xdg-open "$FILE"
   '';
 
-  scratch-fhs = buildFHSUserEnv {
+  scratch-fhs = buildFHSEnv {
     name = "scratch";
     targetPkgs = _: [ xdg-open unwrapped ];
     runScript = "${unwrapped}/bin/scratch";
