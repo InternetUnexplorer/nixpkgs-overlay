@@ -42,6 +42,8 @@ stdenv.mkDerivation rec {
     hash = "sha256-JaqwzCWVnvFzzGHnmzYwe3occ9iw7s9xCH54eVKEuOs=";
   };
 
+  patches = [ ./0001-gcc-14.patch ];
+
   nativeBuildInputs =
     [ desktop-file-utils itstool meson ninja pkg-config wrapGAppsHook4 ];
 

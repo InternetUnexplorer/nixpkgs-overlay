@@ -1,0 +1,12 @@
+diff --git a/src/util.cpp b/src/util.cpp
+index 73b774717..378dff7bd 100644
+--- a/src/util.cpp
++++ b/src/util.cpp
+@@ -19,6 +19,7 @@
+ 
+ #include "util.hpp"
+ 
++#include <algorithm>
+ #include <utility>
+ 
+ namespace util {
