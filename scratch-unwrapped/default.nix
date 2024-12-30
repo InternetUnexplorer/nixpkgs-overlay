@@ -54,6 +54,7 @@ in stdenv.mkDerivation {
     homepage = "https://scratch.mit.edu";
     license = licenses.gpl2;
     platforms = platforms.linux;
+    broken = true; # :(
   };
 
   passthru.exePath = "/bin/scratch";
