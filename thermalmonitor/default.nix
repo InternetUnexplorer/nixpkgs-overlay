@@ -2,14 +2,14 @@
 
 stdenv.mkDerivation rec {
   pname = "thermalmonitor";
-  version = "0.2.3";
+  version = "0.2.4";
 
   src = fetchFromGitLab {
     domain = "invent.kde.org";
     owner = "olib";
     repo = "thermalmonitor";
     rev = "v${version}";
-    hash = "sha256-1kzJ1IUq9DPfHiULCg6QDSAS4kYqSYY7kZetkKZZmxQ=";
+    hash = "sha256-DZGdNwfXzVc0rzVYnQW7S0q1ju/VnHmDEBFBfFFTL70=";
   };
 
   buildInputs = with kdePackages; [
