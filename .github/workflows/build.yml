@@ -58,7 +58,7 @@ jobs:
 
       # cachix-action will take care of pushing everything to the binary cache.
       - name: Set up binary cache
-        uses: cachix/cachix-action@v15
+        uses: cachix/cachix-action@v16
         with:
           name: internetunexplorer
           authToken: ${{ secrets.CACHIX_TOKEN }}
