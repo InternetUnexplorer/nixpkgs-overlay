@@ -15,8 +15,12 @@ The following files were copied from Nixpkgs and are subject to the [Nixpkgs lic
 - [squeak_4_10/squeak_4_10.nix](./squeak_4_10/squeak_4_10.nix)
 - [yosys-unstable/plugin-search-dirs.patch](./yosys-unstable/plugin-search-dirs.patch)
 
-All other files are licensed under [CC0][3].
+The patches in [easyeffects_7_0_4](easyeffects_7_0_4) were copied from
+easyeffects and are subject to the [easyeffects license][3].
+
+All other files are licensed under [CC0][4].
 
 [1]: https://internetunexplorer.cachix.org/
 [2]: https://github.com/NixOS/nixpkgs/blob/master/COPYING
-[3]: https://creativecommons.org/publicdomain/zero/1.0/
+[3]: https://github.com/wwmm/easyeffects/blob/master/LICENSE
+[4]: https://creativecommons.org/publicdomain/zero/1.0/

@@ -1,0 +1,22 @@
+From 83b9d5cc5f53ad6ce2a1094a846d9d8317b67869 Mon Sep 17 00:00:00 2001
+From: wwmm <wellingtonwallace@gmail.com>
+Date: Tue, 19 Nov 2024 14:06:41 -0300
+Subject: [PATCH] crystalizer: fixing a bug in the intensity configuration
+
+---
+ src/crystalizer.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/crystalizer.cpp b/src/crystalizer.cpp
+index 9624aadf0..8f88282c9 100644
+--- a/src/crystalizer.cpp
++++ b/src/crystalizer.cpp
+@@ -293,7 +293,7 @@ void Crystalizer::bind_band(const int& n) {
+                                               auto* self = static_cast<Crystalizer*>(user_data);
+ 
+                                               self->band_intensity.at(index) =
+-                                                  g_settings_get_double(settings, key) != 0;
++                                                  util::db_to_linear(g_settings_get_double(settings, key));
+                                             }
+                                           }),
+                                           this));
