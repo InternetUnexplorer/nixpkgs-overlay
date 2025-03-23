@@ -33,6 +33,7 @@ stdenv.mkDerivation rec {
     inherit (src.meta) homepage;
     license = licenses.mit;
     platforms = platforms.linux ++ platforms.darwin; # TODO: is this right?
+    broken = true; # Too sleepy to fix right now :'(
   };
 
   passthru.updateScript = writeShellScript "update-${pname}" ''
