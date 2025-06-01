@@ -3,13 +3,13 @@
 
 buildGoModule rec {
   pname = "tailscale-systray";
-  version = "0-unstable-2022-10-19";
+  version = "0-unstable-2025-05-28";
 
   src = fetchFromGitHub {
     owner = "mattn";
     repo = "tailscale-systray";
-    rev = "e7f8893684e7b8779f34045ca90e5abe6df6056d";
-    hash = "sha256-3kozp6jq0xGllxoK2lGCNUahy/FvXyq11vNSxfDehKE=";
+    rev = "d3d0b625ed3b628e9898c8a43151ce152e82d9a7";
+    hash = "sha256-dmM/q4eov//G7bDmYTqLxsd4cELEjWw53Olbe7r6+Bw=";
   };
 
   vendorHash = "sha256-cztIq7Kkj5alAYDtbPU/6h5S+nG+KAyxJzHBb3pJujs=";
