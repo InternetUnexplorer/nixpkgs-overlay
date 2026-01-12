@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: Set up repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           # Specifying the deploy key here sets it up to be used for pushing
           # later; this is a workaround for GITHUB_TOKEN being unable to trigger
