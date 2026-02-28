@@ -1,4 +1,5 @@
-{ lib, fetchFromGitHub, buildPythonApplication, migen, pyserial, requests }:
+{ lib, fetchFromGitHub, buildPythonApplication, setuptools, migen, pyserial
+, requests }:
 
 buildPythonApplication rec {
   pname = "litex";
@@ -10,6 +11,9 @@ buildPythonApplication rec {
     rev = version;
     hash = "sha256-ibiUzNckxPK//mPrjPIpzOzo0D+FIhUomXeIiXdenhc=";
   };
+
+  pyproject = true;
+  build-system = [ setuptools ];
 
   propagatedBuildInputs = [ migen pyserial requests ];
 

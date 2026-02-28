@@ -11,6 +11,9 @@ python3Packages.buildPythonApplication rec {
     hash = "sha256-zugIHOu1cakFFshYV1LyUeHQWKYpRQQ49eXlWGM2GKo=";
   };
 
+  pyproject = true;
+  build-system = [ python3Packages.setuptools ];
+
   propagatedBuildInputs = with python3Packages; [
     (callPackage ./litex.nix { })
     migen

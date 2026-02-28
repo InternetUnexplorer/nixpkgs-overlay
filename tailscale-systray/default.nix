@@ -1,5 +1,5 @@
-{ lib, buildGoModule, fetchFromGitHub, pkg-config, gtk3
-, libayatana-appindicator-gtk3, writeShellScript, nix-update }:
+{ lib, buildGoModule, fetchFromGitHub, pkg-config, gtk3, libayatana-appindicator
+, writeShellScript, nix-update }:
 
 buildGoModule rec {
   pname = "tailscale-systray";
@@ -15,7 +15,7 @@ buildGoModule rec {
   vendorHash = "sha256-cztIq7Kkj5alAYDtbPU/6h5S+nG+KAyxJzHBb3pJujs=";
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ gtk3 libayatana-appindicator-gtk3 ];
+  buildInputs = [ gtk3 libayatana-appindicator ];
 
   meta = with lib; {
     description = "Linux port of tailscale system tray menu";

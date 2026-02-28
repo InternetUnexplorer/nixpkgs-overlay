@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchFromGitLab, fetchpatch, extra-cmake-modules, plasma5Packages
+{ stdenv, lib, fetchFromGitLab, fetchpatch, extra-cmake-modules, kdePackages
 , writeShellScript, nix-update }:
 
 stdenv.mkDerivation rec {
@@ -12,13 +12,12 @@ stdenv.mkDerivation rec {
     hash = "sha256-rR8FgtLMwShaiuYpgy9M1RH4IJcFtYwmfEgiEWDdpRE=";
   };
 
-  nativeBuildInputs = [ extra-cmake-modules plasma5Packages.wrapQtAppsHook ];
-
-  buildInputs = [ plasma5Packages.plasma-workspace ];
+  nativeBuildInputs = [ extra-cmake-modules kdePackages.wrapQtAppsHook ];
+  buildInputs = [ kdePackages.plasma-workspace ];
 
   meta = with lib; {
     description =
-      "Plasma 5 applet for monitoring CPU, GPU and other available temperature sensors";
+      "Plasma applet for monitoring CPU, GPU and other available temperature sensors";
     inherit (src.meta) homepage;
     license = licenses.gpl2;
     platforms = platforms.linux;

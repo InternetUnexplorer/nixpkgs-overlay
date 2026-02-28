@@ -68,6 +68,7 @@ in stdenv.mkDerivation {
     homepage = "https://apps.kde.org/ksysguard";
     license = licenses.gpl2;
     platforms = platforms.linux;
+    broken = true;
   };
 
   passthru.exePath = "/bin/ksysguard";

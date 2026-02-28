@@ -1,6 +1,6 @@
-{ lib, fetchFromGitHub, python311Packages, writeShellScript, nix-update }:
+{ lib, fetchFromGitHub, python3Packages, writeShellScript, nix-update }:
 
-python311Packages.buildPythonApplication rec {
+python3Packages.buildPythonApplication rec {
   pname = "printrun";
   version = "2.2.0";
 
@@ -11,7 +11,10 @@ python311Packages.buildPythonApplication rec {
     hash = "sha256-INJNGAmghoPIiivQp6AV1XmhyIu8SjfKqL8PTpi/tkY=";
   };
 
-  propagatedBuildInputs = with python311Packages; [
+  pyproject = true;
+  build-system = [ python3Packages.setuptools ];
+
+  propagatedBuildInputs = with python3Packages; [
     appdirs
     cairocffi
     cairosvg
@@ -23,7 +26,7 @@ python311Packages.buildPythonApplication rec {
     pyserial
     dbus-python
     six
-    wxPython_4_2
+    wxpython
   ];
 
   patchPhase = ''

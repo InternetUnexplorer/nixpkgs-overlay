@@ -7,7 +7,7 @@ from os import chdir, environ
 from subprocess import DEVNULL, PIPE, STDOUT, CompletedProcess
 from subprocess import run as _run
 from sys import stderr, path
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List, Optional, Set
 
 ################################################################
 ## General Utilities
@@ -55,7 +55,7 @@ def set_github_output(key: str, value: Any) -> None:
 @dataclass(frozen=True)
 class Package:
     name: str
-    path: str
+    path: Optional[str]
     broken: bool
     has_update_script: bool
 
@@ -75,9 +75,10 @@ def get_all_packages() -> Set[Package]:
     all_packages = nix_eval_json(
         f".#packages.{system}",
         "--apply",
-        "builtins.mapAttrs (_: drv: {"
-        " path = drv.outPath;"
-        " broken = drv.meta.broken;"
+        "builtins.mapAttrs (_: drv:"
+        " let broken = drv.meta.broken or false; in {"
+        " path = if broken then null else drv.outPath;"
+        " inherit broken;"
         " has_update_script = drv.passthru ? updateScript;"
         " })",
     )
@@ -88,7 +89,7 @@ def print_packages(title: str, packages: Set[Package]) -> None:
     """Display a set of packages in alphabetical order by store path."""
     print(f"**{title}:**")
     for package in sorted(list(packages), key=lambda p: p.name) or [None]:
-        print(f"- {package.path if package else '(none)'}")
+        print(f"- {package.path or package.name if package else '(none)'}")
     print()
 
 
