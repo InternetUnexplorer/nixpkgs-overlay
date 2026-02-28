@@ -1,6 +1,7 @@
-{ lib, stdenv, fetchFromGitLab, kdePackages, writeShellScript, nix-update }:
+{ lib, stdenv, fetchFromGitLab, kdePackages, cmake, writeShellScript, nix-update
+}:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "thermalmonitor";
   version = "0.2.7";
 
@@ -8,28 +9,23 @@ stdenv.mkDerivation rec {
     domain = "invent.kde.org";
     owner = "olib";
     repo = "thermalmonitor";
-    rev = "v${version}";
+    rev = "v${finalAttrs.version}";
     hash = "sha256-1TaeE9nsivkaiaCA8lTqwS3DGxh4MlsX1D5Y3VaU584=";
   };
 
-  buildInputs = with kdePackages; [
-    ksystemstats
-    libksysguard
-    kitemmodels
-    kdeclarative
-  ];
-  nativeBuildInputs = [ kdePackages.extra-cmake-modules ];
+  nativeBuildInputs = [ cmake kdePackages.extra-cmake-modules ];
+  buildInputs = [ kdePackages.libplasma ];
 
   dontWrapQtApps = true;
 
   meta = with lib; {
-    description = "A KDE Plasmoid for displaying system temperatures";
+    description = "KDE Plasmoid for showing system temperatures";
     inherit (src.meta) homepage;
     license = licenses.mit;
     platforms = platforms.linux;
   };
 
-  passthru.updateScript = writeShellScript "update-${pname}" ''
-    exec ${nix-update}/bin/nix-update --flake ${pname}
+  passthru.updateScript = writeShellScript "update-${finalAttrs.pname}" ''
+    exec ${nix-update}/bin/nix-update --flake ${finalAttrs.pname}
   '';
-}
+})
