@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Set up repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v22
@@ -51,7 +51,7 @@ jobs:
 
     steps:
       - name: Set up repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v22
