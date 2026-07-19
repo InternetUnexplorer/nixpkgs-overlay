@@ -3,14 +3,14 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "thermalmonitor";
-  version = "0.2.7";
+  version = "0.2.8";
 
   src = fetchFromGitLab {
     domain = "invent.kde.org";
     owner = "olib";
     repo = "thermalmonitor";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-1TaeE9nsivkaiaCA8lTqwS3DGxh4MlsX1D5Y3VaU584=";
+    hash = "sha256-RxSy99zr6aObhjEWuWHFb7k6W0BvsLUj6fQCdn+n1Zw=";
   };
 
   nativeBuildInputs = [ cmake kdePackages.extra-cmake-modules ];
