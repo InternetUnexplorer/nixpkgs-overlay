@@ -1,19 +1,19 @@
 {
-  "version": "1.95.0.0",
-  "rust-1.95.0.0-aarch64-apple-darwin.tar.xz": {
-    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.95.0.0/rust-1.95.0.0-aarch64-apple-darwin.tar.xz",
-    "hash": "sha256-VDrdluRSzFmNOdHf3w8q/2z9xUrlbOLmOtFXxneLXSs="
+  "version": "1.97.0.0",
+  "rust-1.97.0.0-aarch64-apple-darwin.tar.xz": {
+    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.97.0.0/rust-1.97.0.0-aarch64-apple-darwin.tar.xz",
+    "hash": "sha256-Qw/L9Uln6Z0W3r5Ikmod9Viri2evPAYKZY0lznUr15A="
   },
-  "rust-1.95.0.0-aarch64-unknown-linux-gnu.tar.xz": {
-    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.95.0.0/rust-1.95.0.0-aarch64-unknown-linux-gnu.tar.xz",
-    "hash": "sha256-DH2I5oBfm3egSPMH/LHfDGWGOjBsJ4Ej3HcanLbShEw="
+  "rust-1.97.0.0-aarch64-unknown-linux-gnu.tar.xz": {
+    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.97.0.0/rust-1.97.0.0-aarch64-unknown-linux-gnu.tar.xz",
+    "hash": "sha256-3G76iQaElghJfC/7PWqUZliINaebXoiGwineEzZAlFw="
   },
-  "rust-1.95.0.0-x86_64-unknown-linux-gnu.tar.xz": {
-    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.95.0.0/rust-1.95.0.0-x86_64-unknown-linux-gnu.tar.xz",
-    "hash": "sha256-qtL7JLrqtq1hxB8ALxNv4LQW7zmlAdKXUKtmwYpplDM="
+  "rust-1.97.0.0-x86_64-unknown-linux-gnu.tar.xz": {
+    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.97.0.0/rust-1.97.0.0-x86_64-unknown-linux-gnu.tar.xz",
+    "hash": "sha256-qZv+5pIh6f9thjiPaBHuaIzUBeagQAo80XhOjUY+nZk="
   },
-  "rust-src-1.95.0.0.tar.xz": {
-    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.95.0.0/rust-src-1.95.0.0.tar.xz",
-    "hash": "sha256-cIvuM3rC1BwOhhr5MEe//skaBS+8tJV5JdhApB8ydxc="
+  "rust-src-1.97.0.0.tar.xz": {
+    "url": "https://github.com/esp-rs/rust-build/releases/download/v1.97.0.0/rust-src-1.97.0.0.tar.xz",
+    "hash": "sha256-Vo1oi5+PMy7E0EZXVE+tI+mc4R6ebPWDWXnmiijGi3M="
   }
 }
