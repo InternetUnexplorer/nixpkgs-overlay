@@ -43,6 +43,6 @@
       overlays.default = import ./default.nix;
 
       formatter =
-        forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
+        forAllSystems (system: self.packages.${system}.nixfmt-classic);
     };
 }
