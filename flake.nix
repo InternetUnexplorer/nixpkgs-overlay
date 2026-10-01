@@ -18,8 +18,11 @@
         let
           pkgs = import nixpkgs {
             inherit system;
-            config.allowBroken = true;
             config.allowUnfree = true;
+            config.problems.matchers = [{
+              kind = "broken";
+              handler = "ignore";
+            }];
           };
           allPackages =
             import ./all-packages.nix { inherit (pkgs) lib callPackage; };
