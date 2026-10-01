@@ -55,13 +55,29 @@ stdenv.mkDerivation rec {
       substituteInPlace unix/cmake/$i --replace "PATH=" \
         "PATH=${lib.makeBinPath [ coreutils gnused which ]} #"
     done
+
+    sed -i '/npsqueak/d' unix/CMakeLists.txt
+    sed -i 's|IF (''${plugins_list} STREQUAL|IF ("''${plugins_list}" STREQUAL|g' \
+      unix/cmake/Plugins.cmake
   '';
 
   configurePhase = ''
-    unix/cmake/configure --prefix=$out --enable-mpg-{mmx,pthreads}
+    unix/cmake/configure --prefix=$out --enable-mpg-{mmx,pthreads} \
+      -DCMAKE_POLICY_VERSION_MINIMUM=3.5
   '';
 
   hardeningDisable = [ "format" ];
+
+  env.NIX_CFLAGS_COMPILE = lib.concatStringsSep " " [
+    "-std=gnu17"
+    "-Wno-implicit-function-declaration"
+    "-Wno-implicit-int"
+    "-Wno-error=int-conversion"
+    "-Wno-error=incompatible-pointer-types"
+    "-Wno-error=return-mismatch"
+    "-Wno-error=return-type"
+    "-Wno-error=declaration-missing-parameter-type"
+  ];
 
   meta = with lib; {
     description = "Smalltalk programming language and environment";
@@ -77,7 +93,6 @@ stdenv.mkDerivation rec {
     downloadPage = "http://squeakvm.org/unix/index.html";
     license = with licenses; [ asl20 mit ];
     platforms = platforms.linux;
-    broken = true; # :(
   };
 
   passthru.exePath = "/bin/squeak";
