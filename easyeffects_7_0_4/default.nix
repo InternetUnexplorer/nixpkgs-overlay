@@ -27,7 +27,7 @@
 
 { lib, stdenv, desktop-file-utils, fetchFromGitHub, calf, fftw, fftwFloat, fmt_9
 , glib, gsl, gtk4, itstool, libadwaita, libbs2b, libebur128, libsamplerate
-, libsigcxx30, libsndfile, lilv, lsp-plugins, lv2, mda_lv2, meson, ninja
+, libsigcxx_3_0, libsndfile, lilv, lsp-plugins, lv2, mda_lv2, meson, ninja
 , nlohmann_json, pipewire, pkg-config, rnnoise, rubberband, speexdsp, tbb
 , wrapGAppsHook4, zam-plugins, zita-convolver }:
 
@@ -62,7 +62,7 @@ stdenv.mkDerivation rec {
     libbs2b
     libebur128
     libsamplerate
-    libsigcxx30
+    libsigcxx_3_0
     libsndfile
     lilv
     lv2
