@@ -1,1 +1,0 @@
-{ callPackage }: callPackage ./ksysguard.nix { }
