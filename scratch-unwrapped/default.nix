@@ -15,6 +15,11 @@ in stdenv.mkDerivation {
   nativeBuildInputs = [ installShellFiles ];
   buildInputs = [ pkg-config pango squeak ];
 
+  env.NIX_CFLAGS_COMPILE = lib.concatStringsSep " " [
+    "-std=gnu17"
+    "-Wno-implicit-function-declaration"
+  ];
+
   installPhase = ''
     runHook preInstall
 
@@ -54,7 +59,6 @@ in stdenv.mkDerivation {
     homepage = "https://scratch.mit.edu";
     license = licenses.gpl2;
     platforms = platforms.linux;
-    broken = true; # :(
   };
 
   passthru.exePath = "/bin/scratch";
